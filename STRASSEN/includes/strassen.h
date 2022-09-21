@@ -9,8 +9,10 @@
 
 class strassen: public Matrix
 {
-    public:
-    static Matrix strassen(Matrix, Matrix)
+public:
+    static Matrix strassenMultiply(Matrix, Matrix);
+    
+
 }
 
 #endif
