@@ -1,11 +1,16 @@
 /*
- * matrix.h
+ * utils.h
  */
 
-#ifndef __MATRIX_H__
-#define __MATRIX_H__
+#ifndef __UTILS_H__
+#define __UTILS_H__
 
 #include <iostream>
+#include <iostream>
+#include <fstream>
+#include <unistd.h>
+#include <string>
+#include <cmath>
 
 class Matrix
 {
@@ -15,6 +20,7 @@ public:
     Matrix();
     ~Matrix();
     Matrix(const Matrix &);
+    Matrix(const Matrix &, int);
     Matrix &operator=(const Matrix &);
 
     inline double &operator()(int x, int y) { return p[x][y]; }
@@ -33,8 +39,18 @@ public:
     Matrix transpose();
 
     static Matrix createIdentity(int);
+    static Matrix strasseMult(Matrix, Matrix);
     static Matrix solve(Matrix, Matrix);
     static Matrix bandSolve(Matrix, Matrix, int);
+
+    /* PUBLIC FILES FUNCTIONS
+    ********************************/
+    static bool readMatrix(Matrix &, char *);
+    static bool writeMatrix(const Matrix &, char *);
+    /* PUBLIC GUI FUNCTIONS
+    ********************************/
+    static void printMatrix(Matrix);
+    void PreActed(Matrix &, Matrix &);
 
     // functions on vectors
     static double dotProduct(Matrix, Matrix);
@@ -46,7 +62,7 @@ public:
     void readSolutionsFromRREF(std::ostream &os);
     Matrix inverse();
 
-protected:
+private:
     int rows_, cols_;
     double **p;
 
@@ -61,4 +77,12 @@ Matrix operator*(const Matrix &, double);
 Matrix operator*(double, const Matrix &);
 Matrix operator/(const Matrix &, double);
 
+/* PUBLIC GUI FUNCTIONS
+ ********************************/
+char *getPath();
+/* PUBLIC MATRIX DIMENSION FUNCTIONS
+ ********************************/
+double **CreateMultiArray(int);
+int nextPowOfTwo(int);
+bool isPowOfTwo(int);
 #endif
