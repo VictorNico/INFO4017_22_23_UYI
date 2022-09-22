@@ -1,5 +1,5 @@
 /*
- * matrix.cpp
+ * utils.cpp
  */
 
 #include <stdexcept>
@@ -7,10 +7,7 @@
 
 #define EPS 1e-10
 
-using std::domain_error;
-using std::endl;
-using std::istream;
-using std::ostream;
+using namespace std;
 
 /* PUBLIC MEMBER FUNCTIONS
  ********************************/
@@ -57,6 +54,28 @@ Matrix::~Matrix()
 Matrix::Matrix(const Matrix &m) : rows_(m.rows_), cols_(m.cols_)
 {
     allocSpace();
+    for (int i = 0; i < rows_; ++i)
+    {
+        for (int j = 0; j < cols_; ++j)
+        {
+            p[i][j] = m.p[i][j];
+        }
+    }
+}
+
+Matrix::Matrix(const Matrix &m, int size) : rows_(size), cols_(size)
+{
+    allocSpace();
+    // Init to 0
+    for (int i = 0; i < size; ++i)
+    {
+        for (int j = 0; j < size; ++j)
+        {
+            p[i][j] = 0;
+        }
+    }
+
+    // Add old matrix content
     for (int i = 0; i < rows_; ++i)
     {
         for (int j = 0; j < cols_; ++j)
@@ -207,6 +226,69 @@ Matrix Matrix::createIdentity(int size)
         }
     }
     return temp;
+}
+
+Matrix Matrix::strasseMult(Matrix A, Matrix B)
+{
+    // Base case
+    if (A.rows_ == 1)
+    {
+        Matrix C(1,1);
+        C.p[0][0] = A.p[0][0] * B.p[0][0];
+        return C;
+    }
+
+    // Declaring C and calculating dimension of sub-matrices
+    Matrix C(A.rows_, A.rows_);
+    int k = A.rows_ / 2;
+
+    // Initializing sub-matrices and defining sub-matrices
+    Matrix A11(k,k);
+    Matrix A12(k,k);
+    Matrix A21(k,k);
+    Matrix A22(k,k);
+    Matrix B11(k,k);
+    Matrix B12(k,k);
+    Matrix B21(k,k);
+    Matrix B22(k,k);
+    for (int i = 0; i < k; i++){
+        for (int j = 0; j < k; j++)
+        {
+            A11.p[i][j] = A.p[i][j];
+            A12.p[i][j] = A.p[i][k + j];
+            A21.p[i][j] = A.p[k + i][j];
+            A22.p[i][j] = A.p[k + i][k + j];
+            B11.p[i][j] = B.p[i][j];
+            B12.p[i][j] = B.p[i][k + j];
+            B21.p[i][j] = B.p[k + i][j];
+            B22.p[i][j] = B.p[k + i][k + j];
+        }
+    }
+
+    // Calculating the product P1 to P7 and the resulting matrix C using formulas
+    Matrix X5 = strasseMult(A11, B12 - B22);
+    Matrix X4 = strasseMult(A11 + A12, B22);
+    Matrix X7 = strasseMult(A21 + A22, B11);
+    Matrix X6 = strasseMult(A22, B21 - B11);
+    Matrix X2 = strasseMult(A11 + A22, B11 + B22);
+    Matrix X1 = strasseMult(A12 - A22, B21 + B22);
+    Matrix X3 = strasseMult(A11 - A21, B11 + B12);
+
+    Matrix C11 = (((X1 + X2) - X4) + X6);
+    Matrix C12 = (X4 + X5);
+    Matrix C21 = (X6 + X7);
+    Matrix C22 = (((X2 - X3) + X5) - X7);
+
+    // Copying values to C and returning C
+    for(int i=0; i<k; i++){
+        for(int j=0; j<k; j++) {
+            C.p[i][j] = C11.p[i][j];
+            C.p[i][j+k] = C12.p[i][j];
+            C.p[k+i][j] = C21.p[i][j];
+            C.p[k+i][k+j] = C22.p[i][j];
+        }
+    }
+    return C;
 }
 
 Matrix Matrix::solve(Matrix A, Matrix b)
@@ -637,4 +719,135 @@ istream &operator>>(istream &is, Matrix &m)
         }
     }
     return is;
+}
+
+/* PUBLIC FILES FUNCTIONS
+ ********************************/
+bool Matrix::readMatrix(Matrix &m, char *path)
+{
+    // Check if file exists
+    if (access(path, F_OK) != 0)
+    {
+        //Check the read access to it
+        if (access(path, R_OK) == 0)
+        {
+            // Read from the text file
+            ifstream MatrixFile(path);
+
+            // Read the matrix DIMENSION
+            string dim;
+            getline(MatrixFile, dim);
+            if (stoi(dim) > 0)
+            {
+
+                // Create the martix with dimension
+                double **s = CreateMultiArray(stoi(dim));
+                // load matrix information from the file
+                for (int i = 0; i < stoi(dim); i++)
+                {
+                    for (int j = 0; j < stoi(dim); j++)
+                    {
+                        string val;
+                        // If is the last row info
+                        if (j == stoi(dim) - 1)
+                        {
+                            getline(MatrixFile, val);
+                        } // Else
+                        else
+                        {
+                            getline(MatrixFile, val, ',');
+                        }
+                        // Parse string to double
+                        s[i][j] = stod(val);
+                    }
+                }
+                Matrix m(s, stoi(dim), stoi(dim));
+                // Close stream reader
+                MatrixFile.close();
+
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool Matrix::writeMatrix(const Matrix &m, char *path)
+{
+    // Check if file exists
+    if (access(path, F_OK) != 0)
+    {
+        //Check the read access to it
+        if (access(path, W_OK) == 0)
+        {
+            // Read from the text file
+            ofstream MatrixFile(path);
+
+            // Write the matrix DIMENSION
+            MatrixFile << to_string(m.rows_) << endl;
+            // save  matrix information from the file
+            for (int i = 0; i < m.rows_; i++)
+            {
+                for (int j = 0; j < m.rows_; j++)
+                {
+                    // If is the last row info
+                    if (j == m.rows_ - 1)
+                    {
+                        MatrixFile << to_string(m.p[i][j]) << endl;
+                    } // Else
+                    else
+                    {
+                        MatrixFile << to_string(m.p[i][j]) << ',';
+                    }
+                }
+            }
+            // Close stream reader
+            MatrixFile.close();
+
+            return true;
+        }
+    }
+    return false;
+}
+/* PUBLIC GUI FUNCTIONS
+ ********************************/
+char *getPath()
+{
+    char *ch;
+    cout << "Please enter the path of file." << endl;
+    cin >> ch;
+    return ch;
+}
+
+void printMatrix(Matrix m)
+{
+    // Write the matrix DIMENSION
+    cout << "Matrix DIMENSION: " << m.rows_;
+    // save  matrix information from the file
+    for (int i = 0; i < m.rows_; i++)
+    {
+        for (int j = 0; j < m.rows_; j++)
+        {
+            // If is the last row info
+            if (j == m.rows_ - 1)
+            {
+                MatrixFile << to_string(m.p[i][j]) << endl;
+            } // Else
+            else
+            {
+                MatrixFile << to_string(m.p[i][j]) << ',';
+            }
+        }
+    }
+}
+/* PUBLIC MATRIX DIMENSION FUNCTIONS
+ ********************************/
+
+double **CreateMultiArray(int size)
+{
+    double **p = new double *[size];
+    for (int i = 0; i < size; ++i)
+    {
+        p[i] = new double[size];
+    }
 }
