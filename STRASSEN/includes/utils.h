@@ -10,6 +10,7 @@
 #include <fstream>
 #include <unistd.h>
 #include <string>
+#include <cmath>
 
 class Matrix
 {
@@ -49,6 +50,7 @@ public:
     /* PUBLIC GUI FUNCTIONS
     ********************************/
     static void printMatrix(Matrix);
+    void PreActed(Matrix &, Matrix &);
 
     // functions on vectors
     static double dotProduct(Matrix, Matrix);
@@ -80,5 +82,7 @@ Matrix operator/(const Matrix &, double);
 char *getPath();
 /* PUBLIC MATRIX DIMENSION FUNCTIONS
  ********************************/
-
+double **CreateMultiArray(int);
+int nextPowOfTwo(int);
+bool isPowOfTwo(int);
 #endif

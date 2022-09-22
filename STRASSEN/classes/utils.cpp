@@ -3,7 +3,7 @@
  */
 
 #include <stdexcept>
-#include "../includes/matrix.h"
+#include "../includes/utils.h"
 
 #define EPS 1e-10
 
@@ -819,10 +819,11 @@ char *getPath()
     return ch;
 }
 
-void printMatrix(Matrix m)
+void Matrix::printMatrix(Matrix m)
 {
     // Write the matrix DIMENSION
-    cout << "Matrix DIMENSION: " << m.rows_;
+    cout << "Matrix DIMENSION : " << m.rows_ << endl;
+    cout << "Matrix Content :" << endl;
     // save  matrix information from the file
     for (int i = 0; i < m.rows_; i++)
     {
@@ -831,11 +832,11 @@ void printMatrix(Matrix m)
             // If is the last row info
             if (j == m.rows_ - 1)
             {
-                MatrixFile << to_string(m.p[i][j]) << endl;
+                cout << to_string(m.p[i][j]) << endl;
             } // Else
             else
             {
-                MatrixFile << to_string(m.p[i][j]) << ',';
+                cout << to_string(m.p[i][j]) << ',';
             }
         }
     }
@@ -850,4 +851,44 @@ double **CreateMultiArray(int size)
     {
         p[i] = new double[size];
     }
+}
+
+void Matrix::PreActed(Matrix &A, Matrix &b)
+{
+    // Save matrix information
+    Matrix temp1(A),temp2(b);
+    // max dim
+    int max;
+    if(A.rows_ < b.rows_){
+        max = b.rows_;
+    }
+    else{
+        max = A.rows_;
+    }
+
+    // is't power of 2 number of elements
+    if(isPowOfTwo(max))
+    {
+        // redim
+        Matrix A(temp1,max);
+        Matrix b(temp2,max);
+    }
+    else{
+        // redim
+        max = nextPowOfTwo(max);
+        Matrix A(temp1, max);
+        Matrix b(temp2, max);
+    }
+
+
+}
+
+int nextPowOfTwo(int size)
+{
+    return pow(2, ceil(log(size) / log(2)));
+}
+
+bool isPowOfTwo(int size)
+{
+    return log(size) % log(2) == 0;
 }
