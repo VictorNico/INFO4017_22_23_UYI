@@ -103,8 +103,8 @@ void ActionOption(Matrix &m1, Matrix &m2, Matrix &mf)
         case 5:
             // code strassen
             Matrix::PreActed(m1,m2);
-            break;
             mf = Matrix::strasseMult(m1,m2); 
+            break;
         case 6:
             // code save result
             SaveMatrix(mf);

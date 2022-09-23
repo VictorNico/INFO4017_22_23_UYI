@@ -850,7 +850,6 @@ double **CreateMultiArray(int size)
 void Matrix::PreActed(Matrix &A, Matrix &b)
 {
     // Save matrix information
-    const Matrix temp1 = A, temp2 = b;
     // max dim
     int max;
     if(A.rows_ < b.rows_){
@@ -864,10 +863,41 @@ void Matrix::PreActed(Matrix &A, Matrix &b)
     if(isPowOfTwo(max))
     {
         cout << "THE MAX DIM " << max << " IS TWO POWER" << endl;
-        // redim
-        Matrix f(temp1,max);
+        double **s = CreateMultiArray(max);
+        // redim A
+        for (int i = 0; i < max; i++)
+        {
+            for (int j = 0; j < max; j++)
+            {
+                s[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < A.rows_; i++)
+        {
+            for (int j = 0; j < A.rows_; j++)
+            {
+                s[i][j] = A.p[i][j];
+            }
+        }
+        Matrix f(s,max,max);
         A = f;
-        Matrix e(temp2,max);
+        // redim b
+        s = CreateMultiArray(max);
+        for (int i = 0; i < max; i++)
+        {
+            for (int j = 0; j < max; j++)
+            {
+                s[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < b.rows_; i++)
+        {
+            for (int j = 0; j < b.rows_; j++)
+            {
+                s[i][j] = b.p[i][j];
+            }
+        }
+        Matrix e(s,max,max);
         b = e;
     }
     else
@@ -876,9 +906,41 @@ void Matrix::PreActed(Matrix &A, Matrix &b)
         // redim
         max = nextPowOfTwo(max);
         cout << "THE NEXT TWO POWER IS" << max << endl;
-        Matrix f(temp1, max);
+        double **s = CreateMultiArray(max);
+        // redim A
+        for (int i = 0; i < max; i++)
+        {
+            for (int j = 0; j < max; j++)
+            {
+                s[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < A.rows_; i++)
+        {
+            for (int j = 0; j < A.rows_; j++)
+            {
+                s[i][j] = A.p[i][j];
+            }
+        }
+        Matrix f(s, max, max);
         A = f;
-        Matrix e(temp2, max);
+        // redim b
+        s = CreateMultiArray(max);
+        for (int i = 0; i < max; i++)
+        {
+            for (int j = 0; j < max; j++)
+            {
+                s[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < b.rows_; i++)
+        {
+            for (int j = 0; j < b.rows_; j++)
+            {
+                s[i][j] = b.p[i][j];
+            }
+        }
+        Matrix e(s, max, max);
         b = e;
     }
 
