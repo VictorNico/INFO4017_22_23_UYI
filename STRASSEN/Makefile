@@ -31,7 +31,7 @@ strassen:  strassen.o utils.o
 # To create the object file countwords.o, we need the source
 # files countwords.c, scanner.h, and counter.h:
 #
-strassen.o:  strassen.cpp $(INCLUDES)utils.h 
+strassen.o:  strassen.cpp $(INCLUDES)utils.h $(INCLUDES)strassen.h
 	$(CC) $(CFLAGS) -c strassen.cpp
 
 # To create the object file counter.o, we need the source files

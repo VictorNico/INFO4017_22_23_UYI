@@ -6,7 +6,6 @@
 #define __UTILS_H__
 
 #include <iostream>
-#include <iostream>
 #include <fstream>
 #include <string>
 #include <cmath>
@@ -50,7 +49,7 @@ public:
     /* PUBLIC GUI FUNCTIONS
     ********************************/
     static void printMatrix(Matrix);
-    void PreActed(Matrix &, Matrix &);
+    static void PreActed(Matrix &, Matrix &);
 
     // functions on vectors
     static double dotProduct(Matrix, Matrix);

@@ -801,12 +801,12 @@ bool Matrix::writeMatrix(const Matrix &m, string path)
     }
     return false;
 }
+
 /* PUBLIC GUI FUNCTIONS
  ********************************/
 string getPath()
 {
     string ch;
-    cout << "Please enter the path of file." << endl;
     getline (cin, ch);
     return ch;
 }
@@ -833,6 +833,7 @@ void Matrix::printMatrix(Matrix m)
         }
     }
 }
+
 /* PUBLIC MATRIX DIMENSION FUNCTIONS
  ********************************/
 
@@ -849,7 +850,7 @@ double **CreateMultiArray(int size)
 void Matrix::PreActed(Matrix &A, Matrix &b)
 {
     // Save matrix information
-    Matrix temp1(A),temp2(b);
+    const Matrix temp1 = A, temp2 = b;
     // max dim
     int max;
     if(A.rows_ < b.rows_){
@@ -858,19 +859,27 @@ void Matrix::PreActed(Matrix &A, Matrix &b)
     else{
         max = A.rows_;
     }
-
+    cout << "THE MAX DIM IS " << max << endl;
     // is't power of 2 number of elements
     if(isPowOfTwo(max))
     {
+        cout << "THE MAX DIM " << max << " IS TWO POWER" << endl;
         // redim
-        Matrix A(temp1,max);
-        Matrix b(temp2,max);
+        Matrix f(temp1,max);
+        A = f;
+        Matrix e(temp2,max);
+        b = e;
     }
-    else{
+    else
+    {
+        cout << "THE MAX DIM " << max << " IS NOT TWO POWER" << endl;
         // redim
         max = nextPowOfTwo(max);
-        Matrix A(temp1, max);
-        Matrix b(temp2, max);
+        cout << "THE NEXT TWO POWER IS" << max << endl;
+        Matrix f(temp1, max);
+        A = f;
+        Matrix e(temp2, max);
+        b = e;
     }
 
 
