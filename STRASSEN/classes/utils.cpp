@@ -723,99 +723,91 @@ istream &operator>>(istream &is, Matrix &m)
 
 /* PUBLIC FILES FUNCTIONS
  ********************************/
-bool Matrix::readMatrix(Matrix &m, char *path)
+bool Matrix::readMatrix(Matrix &m, string path)
 {
-    // Check if file exists
-    if (access(path, F_OK) != 0)
+    // Read from the text file
+    ifstream MatrixFile(path);
+    // Check if file exists and can be read
+    if (MatrixFile.good())
     {
-        //Check the read access to it
-        if (access(path, R_OK) == 0)
+        // Read the matrix DIMENSION
+        string dim;
+        getline(MatrixFile, dim,'\n');
+
+        if (stoi(dim) > 0)
         {
-            // Read from the text file
-            ifstream MatrixFile(path);
 
-            // Read the matrix DIMENSION
-            string dim;
-            getline(MatrixFile, dim);
-            if (stoi(dim) > 0)
+            // Create the martix with dimension
+            double **s = CreateMultiArray(stoi(dim));
+            // load matrix information from the file
+            for (int i = 0; i < stoi(dim); i++)
             {
-
-                // Create the martix with dimension
-                double **s = CreateMultiArray(stoi(dim));
-                // load matrix information from the file
-                for (int i = 0; i < stoi(dim); i++)
+                for (int j = 0; j < stoi(dim); j++)
                 {
-                    for (int j = 0; j < stoi(dim); j++)
-                    {
-                        string val;
-                        // If is the last row info
-                        if (j == stoi(dim) - 1)
-                        {
-                            getline(MatrixFile, val);
-                        } // Else
-                        else
-                        {
-                            getline(MatrixFile, val, ',');
-                        }
-                        // Parse string to double
-                        s[i][j] = stod(val);
-                    }
-                }
-                Matrix m(s, stoi(dim), stoi(dim));
-                // Close stream reader
-                MatrixFile.close();
-
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-bool Matrix::writeMatrix(const Matrix &m, char *path)
-{
-    // Check if file exists
-    if (access(path, F_OK) != 0)
-    {
-        //Check the read access to it
-        if (access(path, W_OK) == 0)
-        {
-            // Read from the text file
-            ofstream MatrixFile(path);
-
-            // Write the matrix DIMENSION
-            MatrixFile << to_string(m.rows_) << endl;
-            // save  matrix information from the file
-            for (int i = 0; i < m.rows_; i++)
-            {
-                for (int j = 0; j < m.rows_; j++)
-                {
+                    string val;
                     // If is the last row info
-                    if (j == m.rows_ - 1)
+                    if (j == stoi(dim) - 1)
                     {
-                        MatrixFile << to_string(m.p[i][j]) << endl;
+                        getline(MatrixFile, val, '\n');
                     } // Else
                     else
                     {
-                        MatrixFile << to_string(m.p[i][j]) << ',';
+                        getline(MatrixFile, val, ',');
                     }
+                    // Parse string to double
+                    s[i][j] = stod(val);
                 }
             }
+            Matrix A(s, stoi(dim), stoi(dim));
+            m = A;
             // Close stream reader
             MatrixFile.close();
 
             return true;
         }
+    }else{cout << "file not found " << path <<endl;}
+    return false;
+}
+
+bool Matrix::writeMatrix(const Matrix &m, string path)
+{
+    // Read from the text file
+    ofstream MatrixFile(path);
+    // Check if file exists and can be write
+    if (MatrixFile.good())
+    {
+        // Write the matrix DIMENSION
+        MatrixFile << to_string(m.rows_) << endl;
+        // save  matrix information from the file
+        for (int i = 0; i < m.rows_; i++)
+        {
+            for (int j = 0; j < m.rows_; j++)
+            {
+                // If is the last row info
+                if (j == m.rows_ - 1)
+                {
+                    MatrixFile << to_string(m.p[i][j]) << endl;
+                } // Else
+                else
+                {
+                    MatrixFile << to_string(m.p[i][j]) << ',';
+                }
+            }
+        }
+        // Close stream reader
+        MatrixFile.close();
+
+        return true;
     }
     return false;
 }
+
 /* PUBLIC GUI FUNCTIONS
  ********************************/
-char *getPath()
+string getPath()
 {
-    char *ch;
-    cout << "Please enter the path of file." << endl;
-    cin >> ch;
+    string ch;
+    getline (cin, ch);
     return ch;
 }
 
@@ -841,6 +833,7 @@ void Matrix::printMatrix(Matrix m)
         }
     }
 }
+
 /* PUBLIC MATRIX DIMENSION FUNCTIONS
  ********************************/
 
@@ -851,12 +844,12 @@ double **CreateMultiArray(int size)
     {
         p[i] = new double[size];
     }
+    return p;
 }
 
 void Matrix::PreActed(Matrix &A, Matrix &b)
 {
     // Save matrix information
-    Matrix temp1(A),temp2(b);
     // max dim
     int max;
     if(A.rows_ < b.rows_){
@@ -865,19 +858,90 @@ void Matrix::PreActed(Matrix &A, Matrix &b)
     else{
         max = A.rows_;
     }
-
+    cout << "THE MAX DIM IS " << max << endl;
     // is't power of 2 number of elements
     if(isPowOfTwo(max))
     {
-        // redim
-        Matrix A(temp1,max);
-        Matrix b(temp2,max);
+        cout << "THE MAX DIM " << max << " IS TWO POWER" << endl;
+        double **s = CreateMultiArray(max);
+        // redim A
+        for (int i = 0; i < max; i++)
+        {
+            for (int j = 0; j < max; j++)
+            {
+                s[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < A.rows_; i++)
+        {
+            for (int j = 0; j < A.rows_; j++)
+            {
+                s[i][j] = A.p[i][j];
+            }
+        }
+        Matrix f(s,max,max);
+        A = f;
+        // redim b
+        s = CreateMultiArray(max);
+        for (int i = 0; i < max; i++)
+        {
+            for (int j = 0; j < max; j++)
+            {
+                s[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < b.rows_; i++)
+        {
+            for (int j = 0; j < b.rows_; j++)
+            {
+                s[i][j] = b.p[i][j];
+            }
+        }
+        Matrix e(s,max,max);
+        b = e;
     }
-    else{
+    else
+    {
+        cout << "THE MAX DIM " << max << " IS NOT TWO POWER" << endl;
         // redim
         max = nextPowOfTwo(max);
-        Matrix A(temp1, max);
-        Matrix b(temp2, max);
+        cout << "THE NEXT TWO POWER IS" << max << endl;
+        double **s = CreateMultiArray(max);
+        // redim A
+        for (int i = 0; i < max; i++)
+        {
+            for (int j = 0; j < max; j++)
+            {
+                s[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < A.rows_; i++)
+        {
+            for (int j = 0; j < A.rows_; j++)
+            {
+                s[i][j] = A.p[i][j];
+            }
+        }
+        Matrix f(s, max, max);
+        A = f;
+        // redim b
+        s = CreateMultiArray(max);
+        for (int i = 0; i < max; i++)
+        {
+            for (int j = 0; j < max; j++)
+            {
+                s[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < b.rows_; i++)
+        {
+            for (int j = 0; j < b.rows_; j++)
+            {
+                s[i][j] = b.p[i][j];
+            }
+        }
+        Matrix e(s, max, max);
+        b = e;
     }
 
 
@@ -885,10 +949,13 @@ void Matrix::PreActed(Matrix &A, Matrix &b)
 
 int nextPowOfTwo(int size)
 {
-    return pow(2, ceil(log(size) / log(2)));
+    return pow(2, ceil(log2(size)));
 }
 
 bool isPowOfTwo(int size)
 {
-    return log(size) % log(2) == 0;
+    if(size == 0){
+        return false;
+    }
+    return (ceil(log2(size)) == floor(log2(size)));
 }

@@ -6,12 +6,11 @@
 #define __UTILS_H__
 
 #include <iostream>
-#include <iostream>
 #include <fstream>
-#include <unistd.h>
 #include <string>
 #include <cmath>
 
+using namespace std;
 class Matrix
 {
 public:
@@ -45,12 +44,12 @@ public:
 
     /* PUBLIC FILES FUNCTIONS
     ********************************/
-    static bool readMatrix(Matrix &, char *);
-    static bool writeMatrix(const Matrix &, char *);
+    static bool readMatrix(Matrix &, string);
+    static bool writeMatrix(const Matrix &, string);
     /* PUBLIC GUI FUNCTIONS
     ********************************/
     static void printMatrix(Matrix);
-    void PreActed(Matrix &, Matrix &);
+    static void PreActed(Matrix &, Matrix &);
 
     // functions on vectors
     static double dotProduct(Matrix, Matrix);
@@ -79,10 +78,13 @@ Matrix operator/(const Matrix &, double);
 
 /* PUBLIC GUI FUNCTIONS
  ********************************/
-char *getPath();
+string getPath();
 /* PUBLIC MATRIX DIMENSION FUNCTIONS
  ********************************/
 double **CreateMultiArray(int);
 int nextPowOfTwo(int);
 bool isPowOfTwo(int);
+
+
+
 #endif
