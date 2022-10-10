@@ -1,13 +1,10 @@
 /*
- * utils.cpp
+ * matrix.cpp
  */
 
-#include <stdexcept>
 #include "../includes/matrix.h"
 
 #define EPS 1e-10
-
-using namespace std;
 
 /* PUBLIC MEMBER FUNCTIONS
  ********************************/
@@ -802,14 +799,6 @@ bool Matrix::writeMatrix(const Matrix &m, string path)
     return false;
 }
 
-/* PUBLIC GUI FUNCTIONS
- ********************************/
-string getPath()
-{
-    string ch;
-    getline (cin, ch);
-    return ch;
-}
 
 void Matrix::printMatrix(Matrix m)
 {
@@ -834,18 +823,6 @@ void Matrix::printMatrix(Matrix m)
     }
 }
 
-/* PUBLIC MATRIX DIMENSION FUNCTIONS
- ********************************/
-
-double **CreateMultiArray(int size)
-{
-    double **p = new double *[size];
-    for (int i = 0; i < size; ++i)
-    {
-        p[i] = new double[size];
-    }
-    return p;
-}
 
 void Matrix::PreActed(Matrix &A, Matrix &b)
 {
@@ -945,17 +922,4 @@ void Matrix::PreActed(Matrix &A, Matrix &b)
     }
 
 
-}
-
-int nextPowOfTwo(int size)
-{
-    return pow(2, ceil(log2(size)));
-}
-
-bool isPowOfTwo(int size)
-{
-    if(size == 0){
-        return false;
-    }
-    return (ceil(log2(size)) == floor(log2(size)));
 }

@@ -12,7 +12,8 @@
 #
 # for C++ define  CC = g++
 CC = g++
-CFLAGS  = -g -Wall
+CFLAGS  = -g -Wall # for debugging and so on
+# CFLAGS  = -Wall # for not debugging and so on
 FUNCTIONS = functions/
 INCLUDES = includes/
 # typing 'make' will invoke the first target entry in the file 
@@ -20,35 +21,58 @@ INCLUDES = includes/
 # you can name this target entry anything, but "default" or "all"
 # are the most commonly used names by convention
 #
-default: setup
+default: setup clean_bin
 
 # To create the executable file count we need the object files
 # strassen.o, setup.o, and all .o file peer to the project:
 #
-setup:  setup.o strassen.o matrix.o
+setup:  setup.o strassen.o matrix_f.o utils_f.o lcs.o lcs_f.o
 	$(CC) $(CFLAGS) -o setup *.o
 
 # To create the object file setup.o, we need the source
-# files setup.cpp, matrix.h, and counter.h:
+# files setup.cpp and all headers files:
 #
 setup.o:  setup.cpp $(INCLUDES)*.h
 	$(CC) $(CFLAGS) -c setup.cpp
 
-# To create the object file countwords.o, we need the source
-# files countwords.c, scanner.h, and counter.h:
+# To create the object file strassen.o, we need the source
+# files strassen.cpp, matrix.h, strassen.h and utils.h:
 #
 strassen.o:  strassen.cpp $(INCLUDES)matrix.h $(INCLUDES)strassen.h $(INCLUDES)utils.h
 	$(CC) $(CFLAGS) -c strassen.cpp
 
-# To create the object file counter.o, we need the source files
-# counter.c and counter.h:
+# To create the object file matrix.o, we need the source files
+# matrix.cpp, matrix.h and utils.h:
 #
-matrix.o:  $(FUNCTIONS)matrix.cpp $(INCLUDES)matrix.h $(INCLUDES)utils.h
-	$(CC) $(CFLAGS) -c $(FUNCTIONS)matrix.cpp
+matrix_f.o:  $(FUNCTIONS)matrix_f.cpp $(INCLUDES)matrix.h $(INCLUDES)utils.h
+	$(CC) $(CFLAGS) -c $(FUNCTIONS)matrix_f.cpp
+
+# To create the object file lcs.o, we need the source
+# files lcs.cpp, lcs.h and utils.h:
+#
+lcs.o:  lcs.cpp $(INCLUDES)utils.h $(INCLUDES)lcs.h
+	$(CC) $(CFLAGS) -c lcs.cpp
+
+# To create the object file lcs_f.o, we need the source files
+# lcs_f.cpp, lcs.h and utils.h:
+#
+lcs_f.o:  $(FUNCTIONS)lcs_f.cpp $(INCLUDES)lcs.h $(INCLUDES)utils.h
+	$(CC) $(CFLAGS) -c $(FUNCTIONS)lcs_f.cpp
+
+# To create the object file utils_f.o, we need the source files
+# utils_f.cpp and utils.h:
+#
+utils_f.o:  $(FUNCTIONS)utils_f.cpp $(INCLUDES)utils.h
+	$(CC) $(CFLAGS) -c $(FUNCTIONS)utils_f.cpp
 
 # To start over from scratch, type 'make clean'.  This
+# will call the clean_bin and the remove setup file
+clean: clean_bin
+	$(RM) setup
+
+# Clean all binaries object
 # removes the executable file, as well as old .o object
 # files and *~ backup files:
 #
-clean: 
-	$(RM) setup *.o *~
+clean_bin: 
+	$(RM)  *.o *~

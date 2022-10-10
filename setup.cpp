@@ -3,6 +3,7 @@
  */
 
 #include "./includes/strassen.h"
+#include "./includes/lcs.h"
 #include "./includes/setup.h"
 
 using namespace std;
@@ -56,7 +57,7 @@ void MainActionOption()
         {
 
             cout << "\n  CHOOSE YOUR ACTION " << endl;
-            action = getPath();
+            action = getInputUser();
             // cout << tryParse(action, option) << option << endl;
         } while (MainTryParse(action, option) == false);
 
@@ -73,6 +74,7 @@ void MainActionOption()
             break;
         case 2:
             // code load 2
+            LCSLauncher(); 
             break;
         default:
             // code default
