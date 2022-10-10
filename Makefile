@@ -1,68 +1,48 @@
 #
-# 'make depend' uses makedepend to automatically generate dependencies 
-#               (dependencies are added to end of Makefile)
-# 'make'        build executable file 'strassen'
-# 'make clean'  removes all .o and executable files
+# This is an example Makefile for a countwords program.  This
+# program uses both the scanner module and a counter module.
+# Typing 'make' or 'make count' will create the executable file.
 #
 
-# define the C++ compiler to use
+# define some Makefile variables for the compiler and compiler flags
+# to use Makefile variables later in the Makefile: $()
+#
+#  -g    adds debugging information to the executable file
+#  -Wall turns on most, but not all, compiler warnings
+#
+# for C++ define  CC = g++
 CC = g++
-
-# define any compile-time flags
-CFLAGS = -Wall -g
-
-# define any directories containing header files other than /usr/include
+CFLAGS  = -g -Wall
+CLASSES = classes/
+INCLUDES = includes/
+# typing 'make' will invoke the first target entry in the file 
+# (in this case the default target entry)
+# you can name this target entry anything, but "default" or "all"
+# are the most commonly used names by convention
 #
-INCLUDES = -I./includes
+default: strassen
 
-# define any libraries to link into executable:
-#   if I want to link in libraries (libx.so or libx.a) I use the -llibname 
-#   option, something like (this will link in libmylib.so and libm.so:
-# LIBS = -lmylib -lm
-
-# define the C++ source files
-SRCS = ./classes/utils.cpp
-
-# define the C++ object files 
+# To create the executable file count we need the object files
+# countwords.o, counter.o, and scanner.o:
 #
-# This uses Suffix Replacement within a macro:
-#   $(name:string1=string2)
-#         For each word in 'name' replace 'string1' with 'string2'
-# Below we are replacing the suffix .cpp of all words in the macro SRCS
-# with the .o suffix
+strassen:  strassen.o utils.o
+	$(CC) $(CFLAGS) -o strassen strassen.o utils.o
+
+# To create the object file countwords.o, we need the source
+# files countwords.c, scanner.h, and counter.h:
 #
-OBJS = $(SRCS:.cpp=.o)
+strassen.o:  strassen.cpp $(INCLUDES)utils.h $(INCLUDES)strassen.h
+	$(CC) $(CFLAGS) -c strassen.cpp
 
-# define the executable file 
-MAIN = strassen
-
+# To create the object file counter.o, we need the source files
+# counter.c and counter.h:
 #
-# The following part of the makefile is generic; it can be used to 
-# build any executable just by changing the definitions above and by
-# deleting dependencies appended to the file from 'make depend'
+utils.o:  $(CLASSES)utils.cpp $(INCLUDES)utils.h 
+	$(CC) $(CFLAGS) -c $(CLASSES)utils.cpp
+
+# To start over from scratch, type 'make clean'.  This
+# removes the executable file, as well as old .o object
+# files and *~ backup files:
 #
-
-.PHONY: depend clean
-
-all:    $(MAIN)
-        @echo  Simple compiler named strassen has been compiled
-
-$(MAIN): $(OBJS) 
-        $(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) 
-
-# $(LFLAGS) $(LIBS)
-
-# this is a suffix replacement rule for building .o's from .cpp's
-# it uses automatic variables $<: the name of the prerequisite of
-# the rule(a .cpp file) and $@: the name of the target of the rule (a .o file) 
-# (see the gnu make manual section about automatic variables)
-.cpp.o:
-        $(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
-
-clean:
-        $(RM) *.o *~ $(MAIN)
-
-depend: $(SRCS)
-        makedepend $(INCLUDES) $^
-
-# DO NOT DELETE THIS LINE -- make depend needs it
+clean: 
+	$(RM) strassen *.o *~
