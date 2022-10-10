@@ -5,12 +5,7 @@
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <cmath>
-
-using namespace std;
+#include "utils.h"
 class Matrix
 {
 public:

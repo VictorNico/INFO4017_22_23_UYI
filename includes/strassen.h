@@ -5,14 +5,14 @@
 #ifndef __STRASSEN_H__
 #define __STRASSEN_H__
 
-#include <iostream>
 
 #include "matrix.h"
 
-void LoadMatrix(Matrix &);
-void SaveMatrix(Matrix &);
-void ActionOption(Matrix &, Matrix &, Matrix &);
-void ActionMenu();
-bool tryParse(string &, int &);
+void StrassenLoadMatrix(Matrix &);
+void StrassenSaveMatrix(Matrix &);
+void StrassenActionOption(Matrix &, Matrix &, Matrix &);
+void StrassenActionMenu();
+bool StrassenTryParse(string &, int &);
+void StrassenLauncher();
 
 #endif
