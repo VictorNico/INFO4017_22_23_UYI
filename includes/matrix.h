@@ -2,15 +2,10 @@
  * utils.h
  */
 
-#ifndef __UTILS_H__
-#define __UTILS_H__
+#ifndef __MATRIX_H__
+#define __MATRIX_H__
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <cmath>
-
-using namespace std;
+#include "utils.h"
 class Matrix
 {
 public:

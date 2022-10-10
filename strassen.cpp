@@ -3,16 +3,15 @@
  */
 
 #include <stdexcept>
-#include "./includes/utils.h"
+#include "./includes/matrix.h"
 #include "./includes/strassen.h"
 
 using namespace std;
 
-int main(){
-
+void StrassenLauncher()
+{
 
     // welcome menu
-    cout << "  \t\tINFO4017 INF DEPTINF UYI " << endl;
     cout << "  WELCOME TO STRASSEN IMPLEMENTATION " << endl;
     cout << "  YOU'RE ABLE TO MULTIPLY TWO SQUARE MATRIX " << endl;
     cout << "  YOU JUST NEED TO ENTER PATH OF DIFFERENTS " << endl;
@@ -28,12 +27,10 @@ int main(){
     // bool flag = false;
     Matrix m1,m2,mf;
 
-    ActionOption(m1,m2,mf);
-
-    return 0;
+    StrassenActionOption(m1, m2, mf);
 }
 
-bool tryParse(string &input, int &output)
+bool StrassenTryParse(string &input, int &output)
 {
     try
     {
@@ -46,7 +43,7 @@ bool tryParse(string &input, int &output)
     return (output >= 0 && output < 8);
 }
 
-void ActionMenu()
+void StrassenActionMenu()
 {
     cout << "\n\n  HIT THE NUMBER BEHIND THE ACTION TO LAUNCH " << endl;
     cout << "  1) LOAD MATRIX 1 " << endl;
@@ -59,13 +56,13 @@ void ActionMenu()
     cout << "  0) EXIT " << endl;
 }
 
-void ActionOption(Matrix &m1, Matrix &m2, Matrix &mf)
+void StrassenActionOption(Matrix &m1, Matrix &m2, Matrix &mf)
 {
     int option = -1;
     string action;
     do{
         // always show action option to users
-        ActionMenu();
+        StrassenActionMenu();
 
         // get users option from command line
         // gettng path
@@ -75,7 +72,7 @@ void ActionOption(Matrix &m1, Matrix &m2, Matrix &mf)
             cout << "\n  CHOOSE YOUR ACTION " << endl;
             action = getPath();
             // cout << tryParse(action, option) << option << endl;
-        } while (tryParse(action, option) == false);
+        } while (StrassenTryParse(action, option) == false);
 
         // custom action for each action choose
         switch (option)
@@ -86,11 +83,11 @@ void ActionOption(Matrix &m1, Matrix &m2, Matrix &mf)
             break;
         case 1:
             // code load 1
-            LoadMatrix(m1);
+            StrassenLoadMatrix(m1);
             break;
         case 2:
             // code load 2
-            LoadMatrix(m2);
+            StrassenLoadMatrix(m2);
             break;
         case 3:
             // code print 1
@@ -107,7 +104,7 @@ void ActionOption(Matrix &m1, Matrix &m2, Matrix &mf)
             break;
         case 6:
             // code save result
-            SaveMatrix(mf);
+            StrassenSaveMatrix(mf);
             break;
         case 7:
             // code print result
@@ -123,7 +120,7 @@ void ActionOption(Matrix &m1, Matrix &m2, Matrix &mf)
     // Exiting message
 }
 
-void LoadMatrix(Matrix &m)
+void StrassenLoadMatrix(Matrix &m)
 {
 
     string path;
@@ -144,7 +141,7 @@ void LoadMatrix(Matrix &m)
 
 }
 
-void SaveMatrix(Matrix &m)
+void StrassenSaveMatrix(Matrix &m)
 {
 
     string path;
