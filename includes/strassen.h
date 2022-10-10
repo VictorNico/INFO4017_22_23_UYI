@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include "utils.h"
+#include "matrix.h"
 
 void LoadMatrix(Matrix &);
 void SaveMatrix(Matrix &);

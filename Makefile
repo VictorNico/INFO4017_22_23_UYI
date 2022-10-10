@@ -13,7 +13,7 @@
 # for C++ define  CC = g++
 CC = g++
 CFLAGS  = -g -Wall
-CLASSES = classes/
+CLASSES = functions/
 INCLUDES = includes/
 # typing 'make' will invoke the first target entry in the file 
 # (in this case the default target entry)
@@ -25,20 +25,20 @@ default: strassen
 # To create the executable file count we need the object files
 # countwords.o, counter.o, and scanner.o:
 #
-strassen:  strassen.o utils.o
-	$(CC) $(CFLAGS) -o strassen strassen.o utils.o
+strassen:  strassen.o matrix.o
+	$(CC) $(CFLAGS) -o strassen strassen.o matrix.o
 
 # To create the object file countwords.o, we need the source
 # files countwords.c, scanner.h, and counter.h:
 #
-strassen.o:  strassen.cpp $(INCLUDES)utils.h $(INCLUDES)strassen.h
+strassen.o:  strassen.cpp $(INCLUDES)matrix.h $(INCLUDES)strassen.h
 	$(CC) $(CFLAGS) -c strassen.cpp
 
 # To create the object file counter.o, we need the source files
 # counter.c and counter.h:
 #
-utils.o:  $(CLASSES)utils.cpp $(INCLUDES)utils.h 
-	$(CC) $(CFLAGS) -c $(CLASSES)utils.cpp
+matrix.o:  $(CLASSES)matrix.cpp $(INCLUDES)matrix.h 
+	$(CC) $(CFLAGS) -c $(CLASSES)matrix.cpp
 
 # To start over from scratch, type 'make clean'.  This
 # removes the executable file, as well as old .o object

@@ -3,7 +3,7 @@
  */
 
 #include <stdexcept>
-#include "./includes/utils.h"
+#include "./includes/matrix.h"
 #include "./includes/strassen.h"
 
 using namespace std;
