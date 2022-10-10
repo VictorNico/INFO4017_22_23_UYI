@@ -61,10 +61,13 @@ make clean
 make
 ```
 * _execute_
+
+___without debugging flag___
 ```{bash}
-# without debugging flag
 ./setup
-# with debugging flags
+```
+___with debugging flags___
+```{bash}
 ./setup -g 
 ```
 
