@@ -5,17 +5,32 @@ Repository for TPE and TP coding
 ### project structure
 
     .INFO4017_22_23_UYI
-    ├── STRASSEN                            # STRASSEN ALGORITHMS IMPLEMENTATION
-    ├── KARATSUBA                           # KARATSUBA ALGORITHMS IMPLEMENTATION
-    ├── LICENCE                             # LICENCE declaration
-    ├── README.md                           # documentation file
-    ├── Makefile                            # executation production
-    └── setup.cpp                           # futur main entry point
+    ├── DATA                                  # DATA FILE TASKS IMPLEMENTATION
+    ├── FUNCTIONS                             # FUNCTION FILE TASKS IMPLEMENTATION
+    ├── INCLUDES                              # HEADER FILE TASKS IMPLEMENTATION
+    ├── LIBRARIES                             # USEFULL LIBRARIES
+    ├── LICENCE                               # LICENCE DECLARATION OF CODE BASED IMPLEMENTATION
+    ├── README.md                             # documentation file
+    ├── Makefile                              # EXECUTION SCRIPTS FOR PRODUCTION
+    ├── *.cpp                                 # TASKS GUI ENTRY POINT
+    ├── setup                                 # EXECUTABLE GUI ENTRY POINT
+    └── setup.cpp                             # MAIN GUI ENTRY POINT
+
 
 ### Tasks
 
-* $\blue{file.ext}$ description
-  * [x] rule 1
+* [x] ``strassen.cpp`` implementation of matrix mult within DPR paradigm
+* [x] ``lcs.cpp`` implementation of LCS problem solving with PD paradigm
+* [x] ``setup.cpp`` implementation of user gui
+* [ ] ``karatsuba.cpp`` implementation of polynom mult within DPR paradigm
+* [ ] ``sac_a_dos.cpp`` implementation of whole backpack problem within PD paradigm
+* [ ] ``tree.cpp`` implementation of tree methods such as pre-fixed, post-fixed and in-fixed, deep route, ...
+* [ ] ``graph.cpp`` implementation of tree methods such as prim, kuuskal, ...
+* [ ] ``knn.cpp`` implementation of k nearest neighbors method, for k 2,3, ...
+* [ ] ``sort.cpp`` implementation of sort method, such as fusion sort, bubble sort, ...
+* [ ] ``fibonacci.cpp`` implementation of fibonacci method
+* [ ] ``market_traveling.cpp`` implementation of market traveling problem
+* [ ] ``sequence_alignment.cpp`` implementation of sequence alignment problem in genetic, ...
 
 ### Scripts d'installation
 
@@ -37,15 +52,21 @@ gh repo clone VictorNico/INFO4017_22_23_UYI
 cd INFO4017_22_23_UYI/task
 ```
 **usage**
-* _compile_
-```{bash}
-make task|folder
-```
 * _reset_
 ```{bash}
 make clean
 ```
+* _compile_
+```{bash}
+make
+```
 * _execute_
 ```{bash}
-./task
+# without debugging flag
+./setup
+# with debugging flags
+./setup -g 
 ```
+
+__``Notice``__ : -g is use to show some methods 
+progression along the time execution.
