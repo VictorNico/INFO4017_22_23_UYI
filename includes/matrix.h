@@ -71,14 +71,6 @@ Matrix operator*(const Matrix &, double);
 Matrix operator*(double, const Matrix &);
 Matrix operator/(const Matrix &, double);
 
-/* PUBLIC GUI FUNCTIONS
- ********************************/
-string getPath();
-/* PUBLIC MATRIX DIMENSION FUNCTIONS
- ********************************/
-double **CreateMultiArray(int);
-int nextPowOfTwo(int);
-bool isPowOfTwo(int);
 
 
 

@@ -2,31 +2,26 @@
  * strassen.cpp
  */
 
-#include "./includes/strassen.h"
+#include "./includes/lcs.h"
 
-void StrassenLauncher()
+void LCSLauncher()
 {
 
     // welcome menu
-    cout << "  WELCOME TO STRASSEN IMPLEMENTATION " << endl;
-    cout << "  YOU'RE ABLE TO MULTIPLY TWO SQUARE MATRIX " << endl;
+    cout << "  WELCOME TO LCS IMPLEMENTATION " << endl;
+    cout << "  YOU'RE ABLE TO GET LONGEST COMMON SUBSEQUENCES " << endl;
     cout << "  YOU JUST NEED TO ENTER PATH OF DIFFERENTS " << endl;
-    cout << "  MATRIX WITH THE FOLLOWING STRUCTURE " << endl;
-    cout << "  SQUARE_DIM " << endl;
-    cout << "  ITEM_11,ITEM_12,...,ITEM_1SQUARE_DIM " << endl;
-    cout << "  ITEM_21,ITEM_22,...,ITEM_2SQUARE_DIM " << endl;
-    cout << "  ITEM_31,ITEM_32,...,ITEM_3SQUARE_DIM " << endl;
-    cout << "  ITEM_SQUARE_DIM1,ITEM_SQUARE_DIM2,...,ITEM_SQUARE_DIMSQUARE_DIM " << endl;
+    cout << "  SEQUENCE WITH THE STRUCTURE OF TEXT " << endl;
     cout << "  LET'S START " << endl;
 
-    // variables and constant declaration
-    // bool flag = false;
-    Matrix m1,m2,mf;
-
-    StrassenActionOption(m1, m2, mf);
+    // GLOBAL MODULE VARIABLES 
+    string s1,s2;
+    vector<string> sf;
+    int _lcs;
+    LCSActionOption(s1,s2,sf,_lcs);
 }
 
-bool StrassenTryParse(string &input, int &output)
+bool LCSTryParse(string &input, int &output)
 {
     try
     {
@@ -39,84 +34,92 @@ bool StrassenTryParse(string &input, int &output)
     return (output >= 0 && output < 8);
 }
 
-void StrassenActionMenu()
+void LCSActionMenu()
 {
     cout << "\n\n  HIT THE NUMBER BEHIND THE ACTION TO LAUNCH " << endl;
-    cout << "  1) LOAD MATRIX 1 " << endl;
-    cout << "  2) LOAD MATRIX 2 " << endl;
-    cout << "  3) PRINT MATRIX 1 " << endl;
-    cout << "  4) PRINT MATRIX 2 " << endl;
-    cout << "  5) STRASSEN(MATRIX1,MATRIX2) " << endl;
-    cout << "  6) SAVE RESULT MATRIX " << endl;
-    cout << "  7) PRINT RESULT MATRIX " << endl;
+    cout << "  1) LOAD SEQUENCE 1 " << endl;
+    cout << "  2) LOAD SEQUENCE 2 " << endl;
+    cout << "  3) PRINT SEQUENCE 1 " << endl;
+    cout << "  4) PRINT SEQUENCE 2 " << endl;
+    cout << "  5) LCS(SEQUENCE1,SEQUENCE2) " << endl;
+    cout << "  6) SAVE RESULT SUBSEQUENCE " << endl;
+    cout << "  7) PRINT RESULT SUBSEQUENCE " << endl;
     cout << "  0) EXIT " << endl;
 }
 
-void StrassenActionOption(Matrix &m1, Matrix &m2, Matrix &mf)
+void LCSActionOption(string &s1, string &s2, vector<string> &sf, int &lng)
 {
     int option = -1;
     string action;
-    do{
+    vector<vector<cellule> > PD;
+    do
+    {
         // always show action option to users
-        StrassenActionMenu();
+        LCSActionMenu();
 
         // get users option from command line
         // gettng path
         do
         {
-            
+
             cout << "\n  CHOOSE YOUR ACTION " << endl;
             action = getInputUser();
             // cout << tryParse(action, option) << option << endl;
-        } while (StrassenTryParse(action, option) == false);
+        } while (LCSTryParse(action, option) == false);
 
         // custom action for each action choose
         switch (option)
         {
         case 0:
             // Exiting message
-            cout << " THANKS FOR YOUR RELIABILITY AND GOOD BYE " << endl;
+            cout << " THANKS FOR YOUR RELIABILITY " << endl;
             break;
         case 1:
             // code load 1
-            StrassenLoadMatrix(m1);
+            LCSReadSequence(s1);
             break;
         case 2:
             // code load 2
-            StrassenLoadMatrix(m2);
+            LCSReadSequence(s2);
             break;
         case 3:
             // code print 1
-            Matrix::printMatrix(m1);
+            cout << "seq1: " << s1 << endl;
             break;
         case 4:
             // code print 2
-            Matrix::printMatrix(m2);
+            cout << "seq2: " << s2 << endl;
             break;
         case 5:
-            // code strassen
-            Matrix::PreActed(m1,m2);
-            mf = Matrix::strasseMult(m1,m2); 
+            // code lcs
+            PD = lcs(s1, s2, lng);
+            #ifdef DEBUG
+            cout << s1.size() << "," <<s2.size() << endl;
+            #endif
+            sf = LCS(s1,s2,PD,s1.size(),s2.size());
+            #ifdef DEBUG
+            cout << sf.size() << endl;
+            #endif
             break;
         case 6:
             // code save result
-            StrassenSaveMatrix(mf);
+            LCSSaveSequences(sf);
             break;
         case 7:
             // code print result
-            Matrix::printMatrix(mf);
+            printSequences(sf, lng);
             break;
         default:
             // code default
             break;
         }
 
-    }while(option != 0);
+    } while (option != 0);
 
     // Exiting message
 }
 
-void StrassenLoadMatrix(Matrix &m)
+void LCSReadSequence(string &s)
 {
 
     string path;
@@ -127,17 +130,16 @@ void StrassenLoadMatrix(Matrix &m)
         // gettng path
         do
         {
-            cout << "\n  PLEASE HIT THE FIRST MATRIX PATH " << endl;
+            cout << "\n  PLEASE HIT THE SEQUENCE PATH " << endl;
             path = getInputUser();
         } while (path.length() == 0);
 
-        flag = Matrix::readMatrix(m, path);
+        flag = readSequence(s, path);
         flag ? cout << " PROCESS COMPLETED\n" : cout << " AND ERROR OCCUR\n";
     } while (flag == false);
-
 }
 
-void StrassenSaveMatrix(Matrix &m)
+void LCSSaveSequences(vector<string> &s)
 {
 
     string path;
@@ -148,11 +150,11 @@ void StrassenSaveMatrix(Matrix &m)
         // gettng path
         do
         {
-            cout << "\n  PLEASE HIT THE RESULT MATRIX PATH " << endl;
+            cout << "\n  PLEASE HIT THE RESULT LCS PATH " << endl;
             path = getInputUser();
         } while (path.length() == 0);
 
-        flag = Matrix::writeMatrix(m, path);
+        flag = writeSequences(s, path);
         flag ? cout << " PROCESS COMPLETED\n" : cout << " AND ERROR OCCUR\n";
     } while (flag == false);
 }
