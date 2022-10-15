@@ -39,5 +39,6 @@ void GSAActionMenu();
 void GSAActionOption(string &, string &, vector<vector<string> > &, int &, int &, int &, int &);
 void GSAReadSequence(string &);
 void GSASaveSequences(vector<vector<string> > &);
+void GSARmRed(vector<vector<string> > &);
 
 #endif

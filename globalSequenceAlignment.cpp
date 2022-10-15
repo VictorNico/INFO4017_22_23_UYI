@@ -101,7 +101,7 @@ void GSAActionOption(string &s1, string &s2, vector<vector<string> > &sf, int &s
 #endif
             sf = GSA(s1, s2, PD, s1.size(), s2.size());
 
-            
+            // GSARmRed(sf);
 
 #ifdef DEBUG
             cout << sf.size() << endl;
@@ -124,6 +124,33 @@ void GSAActionOption(string &s1, string &s2, vector<vector<string> > &sf, int &s
     } while (option != 0);
 
     // Exiting message
+}
+
+void GSARmRed(vector<vector<string> > &sf){
+    // remove redundancy
+    set<string> a;
+    set<string> c;
+    set<string> b;
+    for (int k1 = 0; k1 < sf[0].size(); k1++)
+    {
+        a.insert(sf[0][k1] + "," + sf[1][k1]);
+    }
+
+    set<string>::iterator it;
+
+    for (it = a.begin(); it != a.end(); ++it)
+    {
+        string j = *it;
+        size_t pos = j.find(",");
+        b.insert(j.substr(0, pos));
+        j.erase(0, pos + 1);
+        c.insert(j);
+    }
+    // back to vectors
+    sf[0].clear();
+    sf[0].assign(b.begin(), b.end());
+    sf[1].clear();
+    sf[1].assign(c.begin(), c.end());
 }
 
 void GSAReadSequence(string &s)
