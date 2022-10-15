@@ -2,6 +2,7 @@
  * setup.cpp
  */
 
+#include "./includes/globalSequenceAlignment.h"
 #include "./includes/strassen.h"
 #include "./includes/lcs.h"
 #include "./includes/setup.h"
@@ -31,7 +32,7 @@ bool MainTryParse(string &input, int &output)
     {
         return false;
     }
-    return (output >= 0 && output < 8);
+    return (output >= 0 && output < 4);
 }
 
 void MainActionMenu()
@@ -39,6 +40,7 @@ void MainActionMenu()
     cout << "\n\n  HIT THE NUMBER BEHIND THE ACTION TO LAUNCH " << endl;
     cout << "  1) STRASSEN " << endl;
     cout << "  2) LCS " << endl;
+    cout << "  3) SEQUENCE GLOBAL ALIGNMENT " << endl;
     cout << "  0) EXIT " << endl;
 }
 
@@ -75,6 +77,10 @@ void MainActionOption()
         case 2:
             // code load 2
             LCSLauncher(); 
+            break;
+        case 3:
+            // code load 2
+            GSALauncher();
             break;
         default:
             // code default

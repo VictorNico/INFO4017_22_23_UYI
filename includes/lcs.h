@@ -7,6 +7,8 @@
 
 #include "utils.h"
 
+#ifndef __CELLULE_H__
+#define __CELLULE_H__
 /*
     abstract structure use to save path and current lcs
 */
@@ -22,6 +24,7 @@ struct cellule
      */
     vector<string> arrows;
 };
+#endif
 
 vector<vector<struct cellule> > lcs(string &, string &, int &);
 vector<string> LCS(string &, string &, vector<vector<struct cellule> >, int, int);

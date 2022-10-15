@@ -1,7 +1,7 @@
 # INFO4017_22_23_UYI
 Repository for TPE and TP coding
 
-## INFO4017_22_23_UYI
+## INFO4017_22_23_UYI 
 ### project structure
 
     .INFO4017_22_23_UYI
@@ -22,6 +22,7 @@ Repository for TPE and TP coding
 * [x] ``strassen.cpp`` implementation of matrix mult within DPR paradigm
 * [x] ``lcs.cpp`` implementation of LCS problem solving with PD paradigm
 * [x] ``setup.cpp`` implementation of user gui
+* [ ] ``globalSequenceAlignment.cpp`` implementation of sequence global alignment within DP paradigm
 * [ ] ``karatsuba.cpp`` implementation of polynom mult within DPR paradigm
 * [ ] ``sac_a_dos.cpp`` implementation of whole backpack problem within PD paradigm
 * [ ] ``tree.cpp`` implementation of tree methods such as pre-fixed, post-fixed and in-fixed, deep route, ...
