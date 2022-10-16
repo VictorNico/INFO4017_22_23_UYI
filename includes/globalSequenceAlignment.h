@@ -40,5 +40,7 @@ void GSAActionOption(string &, string &, vector<vector<string> > &, int &, int &
 void GSAReadSequence(string &);
 void GSASaveSequences(vector<vector<string> > &);
 void GSARmRed(vector<vector<string> > &);
+bool GenADN(int, string);
+void GSAGeneratpr();
 
 #endif

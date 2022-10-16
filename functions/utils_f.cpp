@@ -37,3 +37,34 @@ bool isPowOfTwo(int size)
     }
     return (ceil(log2(size)) == floor(log2(size)));
 }
+
+bool TryParse(string &input, int &output, int limit, int begin)
+{
+    try
+    {
+        output = stoi(input);
+    }
+    catch (invalid_argument)
+    {
+        return false;
+    }
+    return (output >= begin && output < limit);
+}
+
+bool backlog(int len, time_t scoring, time_t tracebacking, int num)
+{
+    // Read from the text file
+    ofstream SequenceFile("logs/gsa.csv", ios_base::app);
+    // Check if file exists and can be write
+    if (SequenceFile.good())
+    {
+    // Write the sequences
+    // save  sequence information to the file
+    SequenceFile << to_string(len) << ";" << scoring << ";" << tracebacking << ";" << to_string(num) << endl;;
+    // Close stream reader
+    SequenceFile.close();
+
+    return true;
+    }
+    return false;
+}

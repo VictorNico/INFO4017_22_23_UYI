@@ -397,3 +397,30 @@ void printSequencesGSA(vector<vector<string> > &sf, int &score_max)
         cout << endl;
     }
 }
+
+bool GenADN(int len, string path)
+{
+    // Read from the text file
+    ofstream SequenceFile(path);
+    // Check if file exists and can be write
+    if (SequenceFile.good())
+    {
+        string seq = "ACTG";
+        // Write the sequences
+        // save  sequence information to the file
+        for (int j = 0; j < len; j++)
+        {
+            string a;
+            int index = (int)(rand() % 4);
+            cout << index <<endl;
+            a.push_back(seq.at(index));
+            SequenceFile << a;
+        }
+        SequenceFile << endl;
+        // Close stream reader
+        SequenceFile.close();
+
+        return true;
+    }
+    return false;
+}

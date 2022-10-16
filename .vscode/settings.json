@@ -12,6 +12,7 @@
         "initializer_list": "cpp",
         "set": "cpp",
         "algorithm": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "chrono": "cpp"
     }
 }

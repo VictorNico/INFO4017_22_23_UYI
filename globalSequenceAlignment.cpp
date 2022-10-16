@@ -47,6 +47,7 @@ void GSAActionMenu()
     cout << "  5) GSA(SEQUENCE1,SEQUENCE2) " << endl;
     cout << "  6) SAVE RESULT SUBSEQUENCE " << endl;
     cout << "  7) PRINT RESULT SUBSEQUENCE " << endl;
+    cout << "  8) ARN GENERATOR " << endl;
     cout << "  0) EXIT " << endl;
 }
 
@@ -68,7 +69,7 @@ void GSAActionOption(string &s1, string &s2, vector<vector<string> > &sf, int &s
             cout << "\n  CHOOSE YOUR ACTION " << endl;
             action = getInputUser();
             // cout << tryParse(action, option) << option << endl;
-        } while (GSATryParse(action, option) == false);
+        } while (TryParse(action, option, 9, 0) == false);
 
         // custom action for each action choose
         switch (option)
@@ -94,20 +95,39 @@ void GSAActionOption(string &s1, string &s2, vector<vector<string> > &sf, int &s
             cout << "seq2: " << s2 << endl;
             break;
         case 5:
+        {
             // code GSA
+            // Get starting timepoint
+            time_t start = time(0);
             PD = gsa(s1, s2, score, match, mismatch, gap);
+            // Get ending timepoint
+            time_t stop = time(0);
+            // use duration cast method
+            time_t duration = (stop * 1000 - start * 1000);
 #ifdef DEBUG
             cout << s1.size() << "," << s2.size() << endl;
+            cout << (start * 1000) << endl
+                 << (stop * 1000) << endl;
 #endif
+            // Get starting timepoint
+            time_t start1 = time(0);
             sf = GSA(s1, s2, PD, s1.size(), s2.size());
-
+            // Get ending timepoint
+            time_t stop1 = time(0);
+            // use duration cast method
+            time_t duration1 = (stop1 * 1000 - start1 * 1000);
+            // save logs
+            backlog((int)max(s1.size(), s2.size()), duration, duration1, (int)sf.size()/2);
             // GSARmRed(sf);
 
 #ifdef DEBUG
             cout << sf.size() << endl;
+            cout << (start1 * 1000) << endl
+                 << (stop1 * 1000) << endl;
 #endif
 
             break;
+        }
         case 6:
             // code save result
             GSASaveSequences(sf);
@@ -115,6 +135,10 @@ void GSAActionOption(string &s1, string &s2, vector<vector<string> > &sf, int &s
         case 7:
             // code print result
             printSequencesGSA(sf, score);
+            break;
+        case 8:
+            // code print result
+            GSAGeneratpr();
             break;
         default:
             // code default
@@ -189,6 +213,34 @@ void GSASaveSequences(vector<vector<string> > &s)
         } while (path.length() == 0);
 
         flag = writeSequencesGSA(s, path);
+        flag ? cout << " PROCESS COMPLETED\n" : cout << " AND ERROR OCCUR\n";
+    } while (flag == false);
+}
+
+void GSAGeneratpr()
+{
+
+    string path;
+    string input;
+    int a;
+    bool flag = false;
+    // load first matrix
+    do
+    {
+        // gettng path
+        do
+        {
+            cout << "\n  PLEASE HIT THE RESULT ARN PATH " << endl;
+            path = getInputUser();
+        } while (path.length() == 0);
+
+        do
+        {
+            cout << "\n  PLEASE HIT THE LENGTH OF THE ARN " << endl;
+            input = getInputUser();
+        } while (TryParse(input, a, 10000, 1) == false);
+
+        flag = GenADN(a,path);
         flag ? cout << " PROCESS COMPLETED\n" : cout << " AND ERROR OCCUR\n";
     } while (flag == false);
 }

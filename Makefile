@@ -12,8 +12,8 @@
 #
 # for C++ define  CC = g++
 CC = g++
-CFLAGS  = -g -Wall # for debugging and so on
-# CFLAGS  = -Wall # for not debugging and so on
+# CFLAGS  = -g -Wall # for debugging and so on
+CFLAGS  = -Wall # for not debugging and so on
 FUNCTIONS = functions/
 INCLUDES = includes/
 # typing 'make' will invoke the first target entry in the file 
