@@ -32,5 +32,5 @@ double **CreateMultiArray(int);
 int nextPowOfTwo(int);
 bool isPowOfTwo(int);
 bool TryParse(string &, int &, int, int);
-bool backlog(int, time_t, time_t, int);
+bool backlog(int,int, time_t, time_t, int);
 #endif

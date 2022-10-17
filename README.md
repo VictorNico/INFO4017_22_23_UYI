@@ -125,21 +125,26 @@ begin:
 endprog
 ```
 
-|max length of word| word 1 | word 2| solution | time ms|
+|n*m| word 1 (n) | word 2 (m)| solution | time ms|
 |:----------------:|:------:|:-----:|:--------:|:---:|
-|4|[here](data/gsa/a.data)|[here](data/gsa/b.data)|[here](data/gsa/ab.data)||
-|10|||||
-|25|||||
-|125|||||
-|225|[here](data/gsa/arn_225.data)|[here](data/gsa/arn_125.data)|||
-|325|||||
-|425|||||
-|525|||||
-|625|||||
-|725|||||
-|825|||||
-|925|||||
-|1025|||||
+|4*4|[here](data/gsa/a.data)|[here](data/gsa/b.data)|[here](data/gsa/ab.data)||
+|10*4|[here](data/gsa/arn_10.data)|[here](data/gsa/a.data)|[here](data/gsa/arn_10_4.data)||
+|15*4|[here](data/gsa/arn_15.data)|[here](data/gsa/b.data)|[here](data/gsa/arn_15_4.data)||
+|15*10|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_15_10.data)||
+|20*4|[here](data/gsa/arn_20.data)|[here](data/gsa/a.data)|[here](data/gsa/arn_20_4.data)||
+|20*10|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_20_10.data)||
+|20*15|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_20_15.data)||
+|25*4|[here](data/gsa/arn_15.data)|[here](data/gsa/b.data)|[here](data/gsa/arn_25_4.data)||
+|25*10|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_25_10.data)||
+|25*15|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_25_15.data)||
+|25*20|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_25_20.data)||
+|30*4|[here](data/gsa/arn_30.data)|[here](data/gsa/a.data)|[here](data/gsa/arn_30_4.data)||
+|30*10|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_30_10.data)||
+|30*15|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_30_15.data)||
+|30*20|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_30_20.data)||
+|30*25|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_30_25.data)||
+|30*125|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_125.data)|[here](data/gsa/arn_30_125.data)||
+|30*225|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_225.data)|[here](data/gsa/arn_30_225.data)||
 
 * [ ] ``karatsuba.cpp`` implementation of polynom mult within DPR paradigm
 * [ ] ``sac_a_dos.cpp`` implementation of whole backpack problem within PD paradigm

@@ -51,7 +51,7 @@ bool TryParse(string &input, int &output, int limit, int begin)
     return (output >= begin && output < limit);
 }
 
-bool backlog(int len, time_t scoring, time_t tracebacking, int num)
+bool backlog(int x, int y, time_t scoring, time_t tracebacking, int num)
 {
     // Read from the text file
     ofstream SequenceFile("logs/gsa.csv", ios_base::app);
@@ -60,7 +60,7 @@ bool backlog(int len, time_t scoring, time_t tracebacking, int num)
     {
     // Write the sequences
     // save  sequence information to the file
-    SequenceFile << to_string(len) << ";" << scoring << ";" << tracebacking << ";" << to_string(num) << endl;;
+    SequenceFile <<to_string(x) << "*" << to_string(x) << ";" << scoring << ";" << tracebacking << ";" << to_string(num) << endl;;
     // Close stream reader
     SequenceFile.close();
 
