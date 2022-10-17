@@ -10,6 +10,9 @@
         "__split_buffer": "cpp",
         "__tree": "cpp",
         "initializer_list": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "algorithm": "cpp",
+        "tuple": "cpp",
+        "chrono": "cpp"
     }
 }

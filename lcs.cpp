@@ -1,5 +1,5 @@
 /*
- * strassen.cpp
+ * lcs.cpp
  */
 
 #include "./includes/lcs.h"

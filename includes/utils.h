@@ -13,8 +13,13 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <chrono>
+#include <ctime>
+
+#define DEBUG
 
 using namespace std;
+using namespace std::chrono;
 
 // #define DEBUG
 
@@ -26,5 +31,6 @@ string getInputUser();
 double **CreateMultiArray(int);
 int nextPowOfTwo(int);
 bool isPowOfTwo(int);
-
+bool TryParse(string &, int &, int, int);
+bool backlog(int, time_t, time_t, int);
 #endif
