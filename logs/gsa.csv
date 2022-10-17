@@ -1,11 +1,17 @@
-max characters; elapsed time dynamic scoring table construction (ms); elapsed time solution traceback generation (ms); number of alignment found
-4;0;0;1
-4;0;0;1
-4;0;0;1
-4;0;0;1
-4;0;0;1
-4;0;0;1
-4;0;0;1
-4;0;0;1
-4;0;0;1
-4;0;0;1
+n*m; elapsed time dynamic scoring table construction (ms); elapsed time solution traceback generation (ms); number of alignment found
+4*4;0;0;1
+10*10;0;0;1
+15*15;0;0;1
+15*15;0;1000;1
+20*20;0;0;1
+20*20;0;0;1
+20*20;0;28000;1
+25*25;0;0;1
+25*25;0;0;1
+25*25;0;0;1
+25*25;0;23000;1
+30*30;0;1000;1
+30*30;0;0;1
+30*30;0;0;1
+30*30;0;10000;1
+30*30;0;2000;1
