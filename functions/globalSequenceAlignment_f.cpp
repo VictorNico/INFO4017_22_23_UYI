@@ -160,13 +160,13 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
             vector<vector<string> > W = GSA(X, Y, PD, i - 1, j - 1);
             for (int d = 0; d < W[0].size(); d++)
             {
-                a1.push_back(W[0][d] + s[0]);
+                a1.push_back(W[0][d] + s.at(0));
             }
             if (W[0].size() == 0)
             {
 
                 string p;
-                p.push_back(s[0]);
+                p.push_back(s.at(0));
                 a1.push_back(p);
             }
             for (int d = 0; d < a1.size(); d++)
@@ -178,13 +178,13 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
 
             for (int d = 0; d < W[1].size(); d++)
             {
-                a2.push_back(W[1][d] + s[1]);
+                a2.push_back(W[1][d] + s.at(1));
             }
             if (W[1].size() == 0)
             {
 
                 string p;
-                p.push_back(s[1]);
+                p.push_back(s.at(1));
                 a2.push_back(p);
             }
             for (int d = 0; d < a2.size(); d++)
@@ -197,15 +197,23 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
         }
         else if (PD[i][j].arrows[0] == "<")
         {
+            s.push_back(X.at(i - 1));
+            s.push_back(Y.at(j - 1));
             vector<vector<string> > W = GSA(X, Y, PD, i - 1, j);
             for (int d = 0; d < W[0].size(); d++)
             {
-                a1.push_back(W[0][d]  + "_");
+                a1.push_back(W[0][d]  + s.at(0));
 #ifdef DEBUG
                 cout << i << "," << j << " e: " << W[0][d] << endl;
 #endif
             }
+            if (W[0].size() == 0)
+            {
 
+                string p;
+                p.push_back(s.at(0));
+                a1.push_back(p);
+            }
             for (int d = 0; d < W[1].size(); d++)
             {
                 a2.push_back(W[1][d] + "_");
@@ -213,24 +221,46 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
                 cout << i << "," << j << " e: " << W[1][d] << endl;
 #endif
             }
+            if (W[1].size() == 0)
+            {
+
+                string p;
+                p.push_back(s.at(1));
+                a2.push_back(p);
+            }
         }
         else if (PD[i][j].arrows[0] == "^")
         {
+            s.push_back(X.at(i - 1));
+            s.push_back(Y.at(j - 1));
             vector<vector<string> > W = GSA(X, Y, PD, i, j - 1);
             for (int d = 0; d < W[1].size(); d++)
             {
-                a2.push_back(W[1][d] + "_");
+                a2.push_back(W[1][d] + s.at(1));
 #ifdef DEBUG
                 cout << i << "," << j << " r: " << W[1][d] << endl;
 #endif
             }
+            if (W[0].size() == 0)
+            {
 
+                string p;
+                p.push_back(s.at(0));
+                a1.push_back(p);
+            }
             for (int d = 0; d < W[0].size(); d++)
             {
                 a1.push_back(W[0][d] + "_");
 #ifdef DEBUG
                 cout << i << "," << j << " r: " << W[0][d] << endl;
 #endif
+            }
+            if (W[1].size() == 0)
+            {
+
+                string p;
+                p.push_back(s.at(1));
+                a2.push_back(p);
             }
         }
     }
@@ -248,12 +278,12 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
             vector<vector<string> > W = GSA(X, Y, PD, i - 1, j - 1);
             for (int d = 0; d < W[0].size(); d++)
             {
-                a1.push_back(W[0][d] + s[0]);
+                a1.push_back(W[0][d] + s.at(0));
             }
             if (W[0].size() == 0)
             {
                 string p;
-                p.push_back(s[0]);
+                p.push_back(s.at(0));
                 a1.push_back(p);
             }
 
@@ -266,13 +296,13 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
 
             for (int d = 0; d < W[1].size(); d++)
             {
-                a2.push_back(W[1][d] + s[1]);
+                a2.push_back(W[1][d] + s.at(1));
             }
             if (W[1].size() == 0)
             {
 
                 string p;
-                p.push_back(s[1]);
+                p.push_back(s.at(1));
                 a2.push_back(p);
             }
             for (int d = 0; d < a2.size(); d++)
@@ -287,7 +317,7 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
             vector<vector<string> > W = GSA(X, Y, PD, i - 1, j);
             for (int d = 0; d < W[0].size(); d++)
             {
-                a1.push_back(W[0][d]);
+                a1.push_back(W[0][d] + s.at(0));
             }
             for (int d = 0; d < a1.size(); d++)
             {
@@ -297,7 +327,7 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
             }
             for (int d = 0; d < W[1].size(); d++)
             {
-                a2.push_back(W[1][d]);
+                a2.push_back(W[1][d] + "_");
             }
             for (int d = 0; d < a2.size(); d++)
             {
@@ -311,7 +341,7 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
             vector<vector<string> > W = GSA(X, Y, PD, i, j - 1);
             for (int d = 0; d < W[1].size(); d++)
             {
-                a2.push_back(W[1][d]);
+                a2.push_back(W[1][d] + s.at(1));
             }
             for (int d = 0; d < a2.size(); d++)
             {
@@ -321,7 +351,7 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
             }
             for (int d = 0; d < W[0].size(); d++)
             {
-                a1.push_back(W[0][d]);
+                a1.push_back(W[0][d] + "_");
             }
             for (int d = 0; d < a1.size(); d++)
             {
@@ -337,6 +367,381 @@ vector<vector<string> > GSA(string &X, string &Y, vector<vector<struct cellule> 
     return A;
 }
 
+vector<vector<string> > GSAIteratif(string &X, string &Y, vector<vector<struct cellule> > PD)
+{
+    vector<vector<string> > A;
+    vector<string> _X, _Y;
+    vector<struct arrows> a;
+    struct arrows  r = {.i = X.size(),.j = Y.size()};
+    a.push_back(r);
+#ifdef DEBUG
+    cout << r.i << "," << r.j << ":" << X << ";" << Y << endl;
+#endif
+    while (a.size() != 0){
+        vector<string> local_X, local_Y;
+        vector<struct arrows> local_a;
+        for (int q = 0; q < a.size(); q++){
+            string s;
+            int i = a[q].i, j = a[q].j;
+#ifdef DEBUG
+            cout << "(i,j) : (" << i << "," << j << ")" << endl; 
+            cout << "_X content {" << endl;
+            for (int o = 0; o < _X.size(); o++){
+                cout << _X[o] << endl;
+            }
+            cout << "}" << endl;
+            cout << "_Y content {" << endl;
+            for (int o = 0; o < _X.size(); o++){
+                cout << _X[o] << endl;
+            }
+            cout << "}" << endl;
+            cout << PD[i][j].arrows.size() << " is|are available" << endl;
+            cout << "{";
+            for (int o = 0; o < PD[i][j].arrows.size(); o++){
+                cout << PD[i][j].arrows[o] << ",";
+            }
+            cout << "}" << endl;
+#endif
+            if (PD[i][j].arrows.size() == 1)
+            {
+                if (PD[i][j].arrows[0] == "")
+                {
+                    if (j == 0 && i > 0)
+                    {
+                        s.push_back(X.at(i - 1));
+                        for (int t = 0; t < _X.size(); t++){
+                            local_X.push_back(s + _X[t]);
+                        }
+                        for (int t = 0; t < _Y.size(); t++){
+                            local_Y.push_back("_" + _Y[t]);
+                        }
+                        if(_X.size() == 0){
+                            local_X.push_back(s);
+                        }
+                        if (_Y.size() == 0)
+                        {
+                            string h = "_";
+                            local_Y.push_back(h);
+                        }
+                    }
+                    else if (i == 0 && j > 0)
+                    {
+                        s.push_back(Y.at(j - 1));
+                        for (int t = 0; t < _X.size(); t++)
+                        {
+                            local_X.push_back("_" + _X[t]);
+                        }
+                        for (int t = 0; t < _Y.size(); t++)
+                        {
+                            local_Y.push_back(s + _Y[t]);
+                        }
+
+                        if(_Y.size() == 0){
+                            local_Y.push_back(s);
+                        }
+                        if (_X.size() == 0)
+                        {
+                            string h = "_";
+                            local_X.push_back(h);
+                        }
+                    }
+                    else
+                    {
+                        for (int t = 0; t < _X.size(); t++)
+                        {
+                            local_X.push_back(_X[t]);
+                        }
+                        for (int t = 0; t < _Y.size(); t++)
+                        {
+                            local_Y.push_back(_Y[t]);
+                        }
+                    }
+#ifdef DEBUG
+                    cout << "_X content after  {" << endl;
+                    for (int o = 0; o < local_X.size(); o++){
+                        cout << local_X[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "_Y content after  {" << endl;
+                    for (int o = 0; o < local_Y.size(); o++){
+                        cout << local_Y[o] << endl;
+                    }
+                    cout << "}" << endl;
+#endif
+                }
+                else if (PD[i][j].arrows[0] == "ˇ")
+                {
+                    s.push_back(X.at(i - 1));
+                    s.push_back(Y.at(j - 1));
+                    for (int t = 0; t < _X.size(); t++)
+                    {
+                        local_X.push_back(s.at(0) + _X[t]);
+                    }
+                    for (int t = 0; t < _Y.size(); t++)
+                    {
+                        local_Y.push_back(s.at(1) + _Y[t]);
+                    }
+                    if (_X.size() == 0)
+                    {
+                        string g;
+                        g.push_back(s.at(0));
+                        local_X.push_back(g);
+                    }
+                    if (_Y.size() == 0)
+                    {
+                        string g;
+                        g.push_back(s.at(1));
+                        local_Y.push_back(g);
+                    }
+                    struct arrows  w = {.i =i-1,.j =j-1};
+                    local_a.push_back(w);
+#ifdef DEBUG
+                    cout << "_X content after ˇ {" << endl;
+                    for (int o = 0; o < local_X.size(); o++){
+                        cout << local_X[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "_Y content after ˇ {" << endl;
+                    for (int o = 0; o < local_Y.size(); o++){
+                        cout << local_Y[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "nexttick (i,j) = (" << i-1 << "," << j-1 << ")" << endl;
+#endif
+                }
+                else if (PD[i][j].arrows[0] == "<")
+                {
+                    for (int t = 0; t < _X.size(); t++)
+                    {
+                        local_X.push_back(X.at(i-1) + _X[t]);
+                    }
+                    for (int t = 0; t < _Y.size(); t++)
+                    {
+                        local_Y.push_back("_" + _Y[t]);
+                    }
+                    if (_X.size() == 0)
+                    {
+                        string g;
+                        g.push_back(X.at(i-1));
+                        local_X.push_back(g);
+                    }
+                    if (_Y.size() == 0)
+                    {
+                        string h = "_"; 
+                        local_Y.push_back(h);
+                    }
+                    struct arrows  w = {.i =i,.j =j-1};
+                    local_a.push_back(w);
+#ifdef DEBUG
+                    cout << "_X content after < {" << endl;
+                    for (int o = 0; o < local_X.size(); o++)
+                    {
+                        cout << local_X[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "_Y content after < {" << endl;
+                    for (int o = 0; o < local_Y.size(); o++)
+                    {
+                        cout << local_Y[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "nexttick (i,j) = (" << i << "," << j-1 << ")" << endl;
+#endif
+                }
+                else if (PD[i][j].arrows[0] == "^")
+                {
+                    for (int t = 0; t < _X.size(); t++)
+                    {
+                        local_X.push_back("_" + _X[t]);
+                    }
+                    for (int t = 0; t < _Y.size(); t++)
+                    {
+                        local_Y.push_back(Y.at(j-1) + _Y[t]);
+                    }
+                    if (_Y.size() == 0)
+                    {
+                        string g;
+                        g.push_back(Y.at(j-1));
+                        local_Y.push_back(g);
+                    }
+                    if (_X.size() == 0)
+                    {
+                        string h = "_"; 
+                        local_X.push_back(h);
+                    }
+                    struct arrows  w = {.i =i-1,.j =j};
+                    local_a.push_back(w);
+#ifdef DEBUG
+                    cout << "_X content after ^ {" << endl;
+                    for (int o = 0; o < local_X.size(); o++){
+                        cout << local_X[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "_Y content after ^ {" << endl;
+                    for (int o = 0; o < local_Y.size(); o++){
+                        cout << local_Y[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "nexttick (i,j) = (" << i-1 << "," << j << ")" << endl;
+#endif
+                }
+            }
+            else
+            {
+                if (PD[i][j].arrows[0] == "ˇ" || PD[i][j].arrows[1] == "ˇ")
+                {
+                    s.push_back(X.at(i - 1));
+                    s.push_back(Y.at(j - 1));
+                    for (int t = 0; t < _X.size(); t++)
+                    {
+                        local_X.push_back(s.at(0) + _X[t]);
+                    }
+                    for (int t = 0; t < _Y.size(); t++)
+                    {
+                        local_Y.push_back(s.at(1) + _Y[t]);
+                    }
+                    if (_X.size() == 0)
+                    {
+                        string g;
+                        g.push_back(s.at(0));
+                        local_X.push_back(g);
+                    }
+                    if (_Y.size() == 0)
+                    {
+                        string g;
+                        g.push_back(s.at(1));
+                        local_Y.push_back(g);
+                    }
+                    struct arrows  w = {.i =i-1,.j =j-1};
+                    local_a.push_back(w);
+#ifdef DEBUG
+                    cout << "_X content after ˇ {" << endl;
+                    for (int o = 0; o < local_X.size(); o++)
+                    {
+                        cout << local_X[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "_Y content after ˇ {" << endl;
+                    for (int o = 0; o < local_Y.size(); o++)
+                    {
+                        cout << local_Y[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "nexttick (i,j) = (" << i - 1 << "," << j - 1 << ")" << endl;
+#endif
+                }
+                if (PD[i][j].arrows[0] == "<" || PD[i][j].arrows[1] == "<")
+                {
+                    for (int t = 0; t < _X.size(); t++)
+                    {
+                        local_X.push_back(X.at(i-1) + _X[t]);
+                    }
+                    for (int t = 0; t < _Y.size(); t++)
+                    {
+                        local_Y.push_back("_" + _Y[t]);
+                    }
+                    if (_X.size() == 0)
+                    {
+                        string g;
+                        g.push_back(X.at(i - 1));
+                        local_X.push_back(g);
+                    }
+                    if (_Y.size() == 0)
+                    {
+                        string h = "_";
+                        local_Y.push_back(h);
+                    }
+                    struct arrows  w = {.i =i,.j =j-1};
+                    local_a.push_back(w);
+#ifdef DEBUG
+                    cout << "_X content after < {" << endl;
+                    for (int o = 0; o < local_X.size(); o++){
+                        cout << local_X[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "_Y content after < {" << endl;
+                    for (int o = 0; o < local_Y.size(); o++){
+                        cout << local_Y[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "nexttick (i,j) = (" << i << "," << j-1 << ")" << endl;
+#endif
+                }
+                if (PD[i][j].arrows[0] == "^" || PD[i][j].arrows[1] == "^")
+                {
+                    
+                    for (int t = 0; t < _X.size(); t++)
+                    {
+                        local_X.push_back("_" + _X[t]);
+                    }
+                    for (int t = 0; t < _Y.size(); t++)
+                    {
+                        local_Y.push_back(Y.at(j-1) + _Y[t]);
+                    }
+                    if (_Y.size() == 0)
+                    {
+                        string g;
+                        g.push_back(Y.at(j - 1));
+                        local_Y.push_back(g);
+                    }
+                    if (_X.size() == 0)
+                    {
+                        string h = "_";
+                        local_X.push_back(h);
+                    }
+                    struct arrows  w = {.i =i-1,.j =j};
+                    local_a.push_back(w);
+#ifdef DEBUG
+                    cout << "_X content after ^ {" << endl;
+                    for (int o = 0; o < local_X.size(); o++)
+                    {
+                        cout << local_X[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "_Y content after ^ {" << endl;
+                    for (int o = 0; o < local_Y.size(); o++)
+                    {
+                        cout << local_Y[o] << endl;
+                    }
+                    cout << "}" << endl;
+                    cout << "nexttick (i,j) = (" << i-1 << "," << j << ")" << endl;
+#endif
+                }
+            }
+        }
+        // save the new generation of the vector X, Y, a
+        _X = local_X;
+        _Y = local_Y;
+        a = local_a;
+#ifdef DEBUG
+        cout << "=========================================" << endl;
+        cout << "a content of nexttick {" << endl;
+        for (int o = 0; o < a.size(); o++){
+            cout << "i:"<< a[o].i  << "j:"<< a[o].j << endl;
+        }
+        cout << "}" <<endl;
+#endif
+    }
+
+    // remove reduncdance
+    /* vector<struct reduncdance> red;
+    for (int k = 0; k < _X.size(); k++){
+        struct reduncdance r = {.x = _X[k], .y= _Y[k]};
+        it = std::find (red.begin(), red.end(), r);
+        if (it != vec.end())
+        {
+            red.push_back
+        }
+    }
+    vector<string> nredx,nredy;
+    for (int k = 0; k < red.size(); k++){
+        nredx.push_back(red[k].x);
+        nredx.push_back(red[k].x);
+    } */
+    A.push_back(_X); // first sequence note X
+    A.push_back(_Y); // second sequence note Y
+    return A;
+}
 /* PUBLIC FILES FUNCTIONS
  ********************************/
 bool readSequenceGSA(string &s, string path)

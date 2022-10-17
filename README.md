@@ -23,20 +23,70 @@ Repository for TPE and TP coding
 * [x] ``lcs.cpp`` implementation of LCS problem solving with PD paradigm
 * [x] ``setup.cpp`` implementation of user gui
 * [x] ``globalSequenceAlignment.cpp`` implementation of sequence global alignment within DP paradim
-    ```pascal
-    Program: GSA
-        entries: X, Y string
-                PD table de programmation dynamique orientée
-        outputs: _GSA vector of alignment
-    begin:
-        a := {(len(X),len(Y))}
-        _X := {}
-        _Y := {}
-        while a != empty do
-            local_X := {}
-            local_Y := {}
-            local_a := {}
-            for all (i,j) in a do
+```pascal
+Program: GSA
+    entries: X, Y string
+            PD table de programmation dynamique orientée
+    outputs: _GSA vector of alignment
+begin:
+    a := {(len(X),len(Y))}
+    _X := {}
+    _Y := {}
+    while a != empty do
+        local_X := {}
+        local_Y := {}
+        local_a := {}
+        for all (i,j) in a do
+            if exists only one arrows in (i,j) cell then
+                if match or mismatch then 
+                    for all xi in _X do 
+                        local_X := local_X U X[i] +  xi 
+                    endfor
+                    for all yi in _Y do 
+                        local_Y := local_Y U Y[j] +  yi 
+                    endfor
+                    local_a := local_a U (i-1,j-1)
+                else if vertical gap then
+                    for all xi in _X do 
+                        local_X := local_X U '_' + xi 
+                    endfor
+                    for all yi in _Y do 
+                        local_Y := local_Y U Y[j] + yi 
+                    endfor
+                    local_a := local_a U (i,j-1)
+                else if horizontal gap then
+                    for all xi in _X do 
+                        local_X := local_X U X[i] +  xi 
+                    endfor
+                    for all yi in _Y do 
+                        local_Y := local_Y U '_' +  yi 
+                    endfor
+                    local_a := local_a U (i-1,j)
+                else 
+                    if i == 0 and j > 0 then
+                        for all xi in _X do 
+                            local_X := local_X U '_' +  xi 
+                        endfor
+                        for all yi in _Y do 
+                            local_Y := local_Y U Y[j] +  yi 
+                        endfor
+                    else if j == 0 and i > 0 then
+                        for all xi in _X do 
+                            local_X := local_X U X[i] +  xi 
+                        endfor
+                        for all yi in _Y do 
+                            local_Y := local_Y U '_' +  yi 
+                        endfor
+                    sinon 
+                        for all xi in _X do 
+                            local_X := local_X U xi 
+                        endfor
+                        for all yi in _Y do 
+                            local_Y := local_Y U yi 
+                        endfor
+                    endif
+                endif
+            else
                 if exists only one arrows in (i,j) cell then
                     if match or mismatch then 
                         for all xi in _X do 
@@ -46,7 +96,8 @@ Repository for TPE and TP coding
                             local_Y := local_Y U Y[j] +  yi 
                         endfor
                         local_a := local_a U (i-1,j-1)
-                    else if vertical gap then
+                    endif
+                    if vertical gap then
                         for all xi in _X do 
                             local_X := local_X U '_' + xi 
                         endfor
@@ -54,7 +105,8 @@ Repository for TPE and TP coding
                             local_Y := local_Y U Y[j] + yi 
                         endfor
                         local_a := local_a U (i,j-1)
-                    else if horizontal gap then
+                    endif
+                    if horizontal gap then
                         for all xi in _X do 
                             local_X := local_X U X[i] +  xi 
                         endfor
@@ -62,68 +114,16 @@ Repository for TPE and TP coding
                             local_Y := local_Y U '_' +  yi 
                         endfor
                         local_a := local_a U (i-1,j)
-                    else 
-                        if i == 0 and j > 0 then
-                            for all xi in _X do 
-                                local_X := local_X U '_' +  xi 
-                            endfor
-                            for all yi in _Y do 
-                                local_Y := local_Y U Y[j] +  yi 
-                            endfor
-                        else if j == 0 and i > 0 then
-                            for all xi in _X do 
-                                local_X := local_X U X[i] +  xi 
-                            endfor
-                            for all yi in _Y do 
-                                local_Y := local_Y U '_' +  yi 
-                            endfor
-                        sinon 
-                            for all xi in _X do 
-                                local_X := local_X U xi 
-                            endfor
-                            for all yi in _Y do 
-                                local_Y := local_Y U yi 
-                            endfor
-                        endif
-                    endif
-                else
-                    if exists only one arrows in (i,j) cell then
-                        if match or mismatch then 
-                            for all xi in _X do 
-                                local_X := local_X U X[i] +  xi 
-                            endfor
-                            for all yi in _Y do 
-                                local_Y := local_Y U Y[j] +  yi 
-                            endfor
-                            local_a := local_a U (i-1,j-1)
-                        endif
-                        if vertical gap then
-                            for all xi in _X do 
-                                local_X := local_X U '_' + xi 
-                            endfor
-                            for all yi in _Y do 
-                                local_Y := local_Y U Y[j] + yi 
-                            endfor
-                            local_a := local_a U (i,j-1)
-                        endif
-                        if horizontal gap then
-                            for all xi in _X do 
-                                local_X := local_X U X[i] +  xi 
-                            endfor
-                            for all yi in _Y do 
-                                local_Y := local_Y U '_' +  yi 
-                            endfor
-                            local_a := local_a U (i-1,j)
-                        endif
                     endif
                 endif
-            endfor
-            _X := local_X
-            _Y := local_Y
-             a := local_a
-        endwhile
-    endprog
-    ```
+            endif
+        endfor
+        _X := local_X
+        _Y := local_Y
+            a := local_a
+    endwhile
+endprog
+```
 
 |max length of word| word 1 | word 2| solution | time ms|
 |:----------------:|:------:|:-----:|:--------:|:---:|

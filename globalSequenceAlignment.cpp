@@ -112,6 +112,7 @@ void GSAActionOption(string &s1, string &s2, vector<vector<string> > &sf, int &s
             // Get starting timepoint
             time_t start1 = time(0);
             sf = GSA(s1, s2, PD, s1.size(), s2.size());
+            // sf = GSAIteratif(s1, s2, PD);
             // Get ending timepoint
             time_t stop1 = time(0);
             // use duration cast method

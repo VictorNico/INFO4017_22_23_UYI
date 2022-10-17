@@ -26,6 +26,30 @@ struct cellule
 };
 #endif
 
+#ifndef __ARROW_H__
+#define __ARROW_H__
+/*
+    abstract structure use to save path and current lcs
+*/
+struct arrows
+{
+    int i;
+    int j;
+};
+#endif
+
+#ifndef __DELREDUNCDANCE_H__
+#define __DELREDUNCDANCE_H__
+/*
+    abstract structure use to save path and current lcs
+*/
+struct reduncdance
+{
+    string x;
+    string y;
+};
+#endif
+
 vector<vector<struct cellule> > gsa(string &, string &, int &, int &, int &, int &);
 vector<vector<string> > GSA(string &, string &, vector<vector<struct cellule> >, int, int);
 bool readSequenceGSA(string &, string);
@@ -42,5 +66,6 @@ void GSASaveSequences(vector<vector<string> > &);
 void GSARmRed(vector<vector<string> > &);
 bool GenADN(int, string);
 void GSAGeneratpr();
+vector<vector<string> > GSAIteratif(string &, string &, vector<vector<struct cellule> >);
 
 #endif
