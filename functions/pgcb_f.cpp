@@ -78,7 +78,7 @@ void PGCBPrintResult(Matrix &_m, int &_pgcb, int &_x, int &_y)
             // If is the last row info
             if (j == _m.getRows() - 1)
             {
-                if (i <= _x && i >= (_x - _pgcb / 2) && j <= _y && j >= (_y - _pgcb / 2))
+                if (i <= _x && i > (_x - _pgcb) && j <= _y && j > (_y - _pgcb))
                 {
                     cout << "\033[1;31m" << _m.getVal(i, j) << "\033[0m" << endl;
                 }else{
@@ -87,7 +87,7 @@ void PGCBPrintResult(Matrix &_m, int &_pgcb, int &_x, int &_y)
             } // Else
             else
             {
-                if (i <= _x && i >= (_x - _pgcb/2) && j <= _y && j >= (_y - _pgcb / 2))
+                if (i <= _x && i > (_x - _pgcb) && j <= _y && j > (_y - _pgcb))
                 {
                     cout << "\033[1;31m" << _m.getVal(i, j) << "\033[0m" << ',';
                 }
