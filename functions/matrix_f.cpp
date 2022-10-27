@@ -189,6 +189,22 @@ void Matrix::swapRows(int r1, int r2)
     p[r2] = temp;
 }
 
+int Matrix::getRows(){
+    return rows_;
+}
+
+int Matrix::getCols(){
+    return cols_;
+}
+
+int Matrix::getVal(int _x, int _y){
+    return p[_x][_y];
+}
+
+void Matrix::setVal(int _x, int _y, int _val){
+    p[_x][_y] = _val;
+}
+
 Matrix Matrix::transpose()
 {
     Matrix ret(cols_, rows_);
@@ -774,7 +790,7 @@ bool Matrix::writeMatrix(const Matrix &m, string path)
     if (MatrixFile.good())
     {
         // Write the matrix DIMENSION
-        MatrixFile << to_string(m.rows_) << endl;
+        MatrixFile << m.rows_ << endl;
         // save  matrix information from the file
         for (int i = 0; i < m.rows_; i++)
         {
@@ -783,11 +799,11 @@ bool Matrix::writeMatrix(const Matrix &m, string path)
                 // If is the last row info
                 if (j == m.rows_ - 1)
                 {
-                    MatrixFile << to_string(m.p[i][j]) << endl;
+                    MatrixFile << m.p[i][j] << endl;
                 } // Else
                 else
                 {
-                    MatrixFile << to_string(m.p[i][j]) << ',';
+                    MatrixFile << m.p[i][j] << ',';
                 }
             }
         }

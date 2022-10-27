@@ -150,6 +150,18 @@ endprog
 |70*50|[here](data/gsa/arn_70.data)|[here](data/gsa/arn_50.data)|[here](data/gsa/arn_70_50.data)||
 
 * [ ] ``pgcb.cpp`` implementation of the most big white square
+
+```pascal
+fonction PGCB(n)
+ pour x = 1 à n
+    pour y = 1 à n
+        si (x,y) est noir
+           pgcb[x,y] = 0
+        sinon si x = 1 ou y = 1
+            pgcb[x,y] = 1
+        sinon
+           pgcb[x,y] = 1 + min{pgcb(x-1,y-1),pgcb(x,y-1),pgcb(x-1,y)}
+```
 * [ ] ``karatsuba.cpp`` implementation of polynom mult within DPR paradigm
 * [ ] ``sac_a_dos.cpp`` implementation of whole backpack problem within PD paradigm
 * [ ] ``tree.cpp`` implementation of tree methods such as pre-fixed, post-fixed and in-fixed, deep route, ...
