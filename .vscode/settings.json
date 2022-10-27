@@ -13,6 +13,7 @@
         "set": "cpp",
         "algorithm": "cpp",
         "tuple": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "ostream": "cpp"
     }
 }

@@ -60,7 +60,7 @@ bool backlog(int x, int y, time_t scoring, time_t tracebacking, int num)
     {
     // Write the sequences
     // save  sequence information to the file
-    SequenceFile <<to_string(x) << "*" << to_string(x) << ";" << scoring << ";" << tracebacking << ";" << to_string(num) << endl;;
+    SequenceFile << x << "*" << y << ";" << scoring << ";" << tracebacking << ";" << to_string(num) << endl;;
     // Close stream reader
     SequenceFile.close();
 

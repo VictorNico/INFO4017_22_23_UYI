@@ -9,6 +9,7 @@ Repository for TPE and TP coding
     ├── FUNCTIONS                             # FUNCTION FILE TASKS IMPLEMENTATION
     ├── INCLUDES                              # HEADER FILE TASKS IMPLEMENTATION
     ├── LIBRARIES                             # USEFULL LIBRARIES
+    ├── LOGS                                  # LOGS DIRECTORY
     ├── LICENCE                               # LICENCE DECLARATION OF CODE BASED IMPLEMENTATION
     ├── README.md                             # documentation file
     ├── Makefile                              # EXECUTION SCRIPTS FOR PRODUCTION
@@ -23,6 +24,8 @@ Repository for TPE and TP coding
 * [x] ``lcs.cpp`` implementation of LCS problem solving with PD paradigm
 * [x] ``setup.cpp`` implementation of user gui
 * [x] ``globalSequenceAlignment.cpp`` implementation of sequence global alignment within DP paradim
+
+
 ```pascal
 Program: GSA
     entries: X, Y string
@@ -87,14 +90,14 @@ begin:
                     endif
                 endif
             else
-                if exists only one arrows in (i,j) cell then
+                if exists more than one arrows in (i,j) cell then
                     if match or mismatch then 
                         for all xi in _X do 
                             local_X := local_X U X[i] +  xi 
                         endfor
                         for all yi in _Y do 
                             local_Y := local_Y U Y[j] +  yi 
-                        endfor
+                        endfor  
                         local_a := local_a U (i-1,j-1)
                     endif
                     if vertical gap then
@@ -120,7 +123,7 @@ begin:
         endfor
         _X := local_X
         _Y := local_Y
-            a := local_a
+        a := local_a
     endwhile
 endprog
 ```
@@ -143,9 +146,10 @@ endprog
 |30*15|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_30_15.data)||
 |30*20|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_30_20.data)||
 |30*25|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_30_25.data)||
-|30*125|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_125.data)|[here](data/gsa/arn_30_125.data)||
-|30*225|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_225.data)|[here](data/gsa/arn_30_225.data)||
+|45*50|[here](data/gsa/arn_45.data)|[here](data/gsa/arn_50.data)|[here](data/gsa/arn_45_50.data)||
+|70*50|[here](data/gsa/arn_70.data)|[here](data/gsa/arn_50.data)|[here](data/gsa/arn_70_50.data)||
 
+* [ ] ``pgcb.cpp`` implementation of the most big white square
 * [ ] ``karatsuba.cpp`` implementation of polynom mult within DPR paradigm
 * [ ] ``sac_a_dos.cpp`` implementation of whole backpack problem within PD paradigm
 * [ ] ``tree.cpp`` implementation of tree methods such as pre-fixed, post-fixed and in-fixed, deep route, ...
