@@ -118,7 +118,7 @@ void GSAActionOption(string &s1, string &s2, vector<vector<string> > &sf, int &s
             // use duration cast method
             time_t duration1 = (stop1 * 1000 - start1 * 1000);
             // save logs
-            backlog(s1.size(), s2.size(), duration, duration1, (int)sf.size()/2);
+            backlog(s1.size(), s2.size(), duration, duration1, sf[0].size());
             // GSARmRed(sf);
 
 #ifdef DEBUG
