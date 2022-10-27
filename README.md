@@ -128,28 +128,27 @@ begin:
 endprog
 ```
 
-|n*m| word 1 (n) | word 2 (m)| solution | time ms|
-|:----------------:|:------:|:-----:|:--------:|:---:|
-|4*4|[here](data/gsa/a.data)|[here](data/gsa/b.data)|[here](data/gsa/ab.data)||
-|10*4|[here](data/gsa/arn_10.data)|[here](data/gsa/a.data)|[here](data/gsa/arn_10_4.data)||
-|15*4|[here](data/gsa/arn_15.data)|[here](data/gsa/b.data)|[here](data/gsa/arn_15_4.data)||
-|15*10|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_15_10.data)||
-|20*4|[here](data/gsa/arn_20.data)|[here](data/gsa/a.data)|[here](data/gsa/arn_20_4.data)||
-|20*10|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_20_10.data)||
-|20*15|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_20_15.data)||
-|25*4|[here](data/gsa/arn_15.data)|[here](data/gsa/b.data)|[here](data/gsa/arn_25_4.data)||
-|25*10|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_25_10.data)||
-|25*15|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_25_15.data)||
-|25*20|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_25_20.data)||
-|30*4|[here](data/gsa/arn_30.data)|[here](data/gsa/a.data)|[here](data/gsa/arn_30_4.data)||
-|30*10|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_30_10.data)||
-|30*15|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_30_15.data)||
-|30*20|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_30_20.data)||
-|30*25|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_30_25.data)||
-|45*50|[here](data/gsa/arn_45.data)|[here](data/gsa/arn_50.data)|[here](data/gsa/arn_45_50.data)||
-|70*50|[here](data/gsa/arn_70.data)|[here](data/gsa/arn_50.data)|[here](data/gsa/arn_70_50.data)||
+|n*m| word 1 (n) | word 2 (m)| solution | time ms| number of alignments|
+|:----------------:|:------:|:-----:|:--------:|:---:|:---:|
+|4*4|[here](data/gsa/a.data)|[here](data/gsa/b.data)|[here](data/gsa/ab.data)|0|3|
+|10*4|[here](data/gsa/arn_10.data)|[here](data/gsa/a.data)|[here](data/gsa/arn_10_4.data)|0|17|
+|15*4|[here](data/gsa/arn_15.data)|[here](data/gsa/b.data)|[here](data/gsa/arn_15_4.data)|0|18|
+|15*10|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_15_10.data)|0|54|
+|20*4|[here](data/gsa/arn_20.data)|[here](data/gsa/a.data)|[here](data/gsa/arn_20_4.data)|0|31|
+|20*10|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_20_10.data)|0|45|
+|20*15|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_20_15.data)|25000|3114|
+|25*4|[here](data/gsa/arn_15.data)|[here](data/gsa/b.data)|[here](data/gsa/arn_25_4.data)|0|4|
+|25*10|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_25_10.data)|0|39|
+|25*15|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_25_15.data)|1000|59|
+|25*20|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_25_20.data)|26000|1691|
+|30*4|[here](data/gsa/arn_30.data)|[here](data/gsa/a.data)|[here](data/gsa/arn_30_4.data)|1000|33|
+|30*10|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_10.data)|[here](data/gsa/arn_30_10.data)|0|14|
+|30*15|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_15.data)|[here](data/gsa/arn_30_15.data)|1000|479|
+|30*20|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_20.data)|[here](data/gsa/arn_30_20.data)|0|84|
+|30*25|[here](data/gsa/arn_30.data)|[here](data/gsa/arn_25.data)|[here](data/gsa/arn_30_25.data)|4000|140|
+|45*50|[here](data/gsa/arn_45.data)|[here](data/gsa/arn_50.data)|[here](data/gsa/arn_45_50.data)|137000|1520|
 
-* [ ] ``pgcb.cpp`` implementation of the most big white square
+* [x] ``pgcb.cpp`` implementation of the most big white square
 
 ```pascal
 fonction PGCB(n)
