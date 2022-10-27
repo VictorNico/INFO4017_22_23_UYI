@@ -26,7 +26,7 @@ default: setup clean_bin
 # To create the executable file count we need the object files
 # strassen.o, setup.o, and all .o file peer to the project:
 #
-setup:  setup.o strassen.o matrix_f.o utils_f.o lcs.o lcs_f.o globalSequenceAlignment.o globalSequenceAlignment_f.o
+setup:  setup.o strassen.o matrix_f.o utils_f.o lcs.o lcs_f.o globalSequenceAlignment.o globalSequenceAlignment_f.o pgcb_f.o pgcb.o
 	$(CC) $(CFLAGS) -o setup *.o
 
 # To create the object file setup.o, we need the source
@@ -59,17 +59,29 @@ lcs.o:  lcs.cpp $(INCLUDES)utils.h $(INCLUDES)lcs.h
 lcs_f.o:  $(FUNCTIONS)lcs_f.cpp $(INCLUDES)lcs.h $(INCLUDES)utils.h
 	$(CC) $(CFLAGS) -c $(FUNCTIONS)lcs_f.cpp
 
-# To create the object file lcs.o, we need the source
+# To create the object file globalSequenceAlignment.o, we need the source
 # files lcs.cpp, lcs.h and utils.h:
 #
 globalSequenceAlignment.o:  globalSequenceAlignment.cpp $(INCLUDES)utils.h $(INCLUDES)globalSequenceAlignment.h
 	$(CC) $(CFLAGS) -c globalSequenceAlignment.cpp
 
-# To create the object file lcs_f.o, we need the source files
+# To create the object file globalSequenceAlignment_f.o, we need the source files
 # lcs_f.cpp, lcs.h and utils.h:
 #
 globalSequenceAlignment_f.o:  $(FUNCTIONS)globalSequenceAlignment_f.cpp $(INCLUDES)globalSequenceAlignment.h $(INCLUDES)utils.h
 	$(CC) $(CFLAGS) -c $(FUNCTIONS)globalSequenceAlignment_f.cpp
+
+# To create the object file pgcb.o, we need the source
+# files lcs.cpp, lcs.h and utils.h:
+#
+pgcb.o:  pgcb.cpp $(INCLUDES)utils.h $(INCLUDES)pgcb.h $(INCLUDES)matrix.h
+	$(CC) $(CFLAGS) -c pgcb.cpp
+
+# To create the object file globalSequenceAlignment_f.o, we need the source files
+# lcs_f.cpp, lcs.h and utils.h:
+#
+pgcb_f.o:  $(FUNCTIONS)pgcb_f.cpp $(INCLUDES)utils.h $(INCLUDES)pgcb.h $(INCLUDES)matrix.h
+	$(CC) $(CFLAGS) -c $(FUNCTIONS)pgcb_f.cpp
 
 # To create the object file utils_f.o, we need the source files
 # utils_f.cpp and utils.h:

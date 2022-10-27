@@ -31,7 +31,10 @@ public:
 
     void swapRows(int, int);
     Matrix transpose();
-
+    int getRows();
+    int getCols();
+    int getVal(int, int);
+    void setVal(int, int, int);
     static Matrix createIdentity(int);
     static Matrix strasseMult(Matrix, Matrix);
     static Matrix solve(Matrix, Matrix);
@@ -41,7 +44,8 @@ public:
     ********************************/
     static bool readMatrix(Matrix &, string);
     static bool writeMatrix(const Matrix &, string);
-    /* PUBLIC GUI FUNCTIONS
+    static bool GenMonochroneImageMatrix(int len, string path);
+        /* PUBLIC GUI FUNCTIONS
     ********************************/
     static void printMatrix(Matrix);
     static void PreActed(Matrix &, Matrix &);
@@ -56,7 +60,7 @@ public:
     void readSolutionsFromRREF(std::ostream &os);
     Matrix inverse();
 
-private:
+protected:
     int rows_, cols_;
     double **p;
 
