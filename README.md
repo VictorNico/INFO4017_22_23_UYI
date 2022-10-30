@@ -160,6 +160,74 @@ fonction PGCB(n)
             pgcb[x,y] = 1
         sinon
            pgcb[x,y] = 1 + min{pgcb(x-1,y-1),pgcb(x,y-1),pgcb(x-1,y)}
+
+```
+
+```pascal
+
+Programme PGCB
+    données:    A matrice binaire représentant l'image chromatique
+                n la taille de la matrice binaire
+    resultats: (_c,_x,_y) 
+    variables:  _pgcb un tableau,
+                _c,_x,_y des d'entier
+Debut
+    // cette version de l'algorithme de pgcb retourne à la fois la taille _c des plus grand carré blanc 
+    // et deux vecteur _x,_y représentation conjointement les différentes position de pixels
+    // en bas à droit de ses grand carré blanc
+
+    // tout d'abord redimensionner _pgcd suivant la taille de l'image prise en paramètre
+    redim(_pgcb,n);
+
+    // initialisons la taille maximal du plus grand carré
+    _c = -1;
+
+    // contruction
+    pour i de 1 à n faire
+        pour j de 1 à n faire 
+            _pgcb[i][j] = 0
+        finpour
+    finpour
+    // remplissage du tableau de programmation dynamique
+    pour i de 1 à n faire
+        pour j de 1 à n faire 
+            si A[i][j] == 0 alors // où 0 matérialise le blanc dans notre image chromatique
+                si i == 0 ou j == 0 alors
+                    _pgcb[i][j] = 1
+                    si _c < 1 alors
+                        vider(_x)
+                        vider(_y)
+                        _c = 1
+                        _x.ajouter(i)
+                        _y.ajouter(j)
+                    sinon
+                        si _c == 1 alors 
+                            _x.ajouter(i)
+                            _y.ajouter(j)
+                        finsi
+                    finsi
+                sinon
+                    _pgcb[i][j] = min(_pgcb[i-1][j-1],min(_pgcb[i][j-1],_pgcb[i-1][j]))
+                    si _c < _pgcb[i][j] alors
+                        vider(_x)
+                        vider(_y)
+                        _c = _pgcb[i][j]
+                        _x.ajouter(i)
+                        _y.ajouter(j)
+                    sinon
+                        si _c == _pgcb[i][j] alors 
+                            _x.ajouter(i)
+                            _y.ajouter(j)
+                        finsi
+                    finsi
+                finsi
+            finsi
+        finpour
+    finpour
+    // retourner la solution
+    retourner (_c,_x,_y)
+fin
+
 ```
 * [ ] ``karatsuba.cpp`` implementation of polynom mult within DPR paradigm
 * [ ] ``sac_a_dos.cpp`` implementation of whole backpack problem within PD paradigm
