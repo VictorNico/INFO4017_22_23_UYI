@@ -278,7 +278,7 @@ ___with debugging flags___
 $ ./setup -g 
 ```
 
-**[releases](https://VictorNico/INFO4017_22_23_UYI/tree/v1.2.2)**
+**[releases](https://github.com/VictorNico/INFO4017_22_23_UYI/tree/v1.2.2)**
 
 __``Notice``__ : -g is use to show some methods 
 progression along the time execution.
