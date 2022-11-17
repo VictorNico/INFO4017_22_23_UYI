@@ -9,6 +9,7 @@
 #include <fstream>
 #include <string>
 #include <cmath>
+#include <random>
 #include <stdexcept>
 #include <vector>
 #include <set>
@@ -33,4 +34,5 @@ int nextPowOfTwo(int);
 bool isPowOfTwo(int);
 bool TryParse(string &, int &, int, int);
 bool backlog(int,int, time_t, time_t, int);
+bool writeStream(string, string);
 #endif

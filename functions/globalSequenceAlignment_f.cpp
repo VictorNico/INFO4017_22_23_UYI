@@ -372,7 +372,7 @@ vector<vector<string> > GSAIteratif(string &X, string &Y, vector<vector<struct c
     vector<vector<string> > A;
     vector<string> _X, _Y;
     vector<struct arrows> a;
-    struct arrows  r = {.i = X.size(),.j = Y.size()};
+    struct arrows  r = {.i = (int)X.size(),.j = (int)Y.size()};
     a.push_back(r);
 #ifdef DEBUG
     cout << r.i << "," << r.j << ":" << X << ";" << Y << endl;

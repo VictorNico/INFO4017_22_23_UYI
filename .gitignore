@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 .DS_Store
+# graphviz
+*.dot
+*.*.dot
 # Compiled Object files
 *.slo
 *.lo

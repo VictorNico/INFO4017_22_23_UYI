@@ -6,9 +6,9 @@
 #include "./includes/strassen.h"
 #include "./includes/pgcb.h"
 #include "./includes/lcs.h"
+#include "./includes/tsp.h"
 #include "./includes/setup.h"
 
-using namespace std;
 
 int main()
 {
@@ -33,7 +33,7 @@ bool MainTryParse(string &input, int &output)
     {
         return false;
     }
-    return (output >= 0 && output < 5);
+    return (output >= 0 && output < 6);
 }
 
 void MainActionMenu()
@@ -43,6 +43,7 @@ void MainActionMenu()
     cout << "  2) LCS " << endl;
     cout << "  3) SEQUENCE GLOBAL ALIGNMENT " << endl;
     cout << "  4) PGCB " << endl;
+    cout << "  5) TSP USING SA " << endl;
     cout << "  0) EXIT " << endl;
 }
 
@@ -87,6 +88,10 @@ void MainActionOption()
         case 4:
             // code load pgcb
             PGCBLauncher(); 
+            break;
+        case 5:
+            // code load pgcb
+            TSPLauncher(); 
             break;
         default:
             // code default
