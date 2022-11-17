@@ -68,3 +68,21 @@ bool backlog(int x, int y, time_t scoring, time_t tracebacking, int num)
     }
     return false;
 }
+bool writeStream(string content, string path)
+{
+    // Read from the text file
+    ofstream SequenceFile(path, ios_base::app);
+    // Check if file exists and can be write
+    if (SequenceFile.good())
+    {
+        // Write the sequences
+        // save  sequence information to the file
+        SequenceFile << content << endl;
+        // Close stream reader
+        SequenceFile.close();
+
+        return true;
+    }
+    return false;
+}
+

@@ -11,7 +11,7 @@
 #  -Wall turns on most, but not all, compiler warnings
 #
 # for C++ define  CC = g++
-CC = g++
+CC = g++ -std=c++14
 # CFLAGS  = -g -Wall # for debugging and so on
 CFLAGS  = -Wall # for not debugging and so on
 FUNCTIONS = functions/
@@ -26,7 +26,7 @@ default: setup clean_bin
 # To create the executable file count we need the object files
 # strassen.o, setup.o, and all .o file peer to the project:
 #
-setup:  setup.o strassen.o matrix_f.o utils_f.o lcs.o lcs_f.o globalSequenceAlignment.o globalSequenceAlignment_f.o pgcb_f.o pgcb.o
+setup:  setup.o strassen.o matrix_f.o utils_f.o lcs.o lcs_f.o globalSequenceAlignment.o globalSequenceAlignment_f.o pgcb_f.o pgcb.o tsp_f.o tsp.o
 	$(CC) $(CFLAGS) -o setup *.o
 
 # To create the object file setup.o, we need the source
@@ -82,6 +82,18 @@ pgcb.o:  pgcb.cpp $(INCLUDES)utils.h $(INCLUDES)pgcb.h $(INCLUDES)matrix.h
 #
 pgcb_f.o:  $(FUNCTIONS)pgcb_f.cpp $(INCLUDES)utils.h $(INCLUDES)pgcb.h $(INCLUDES)matrix.h
 	$(CC) $(CFLAGS) -c $(FUNCTIONS)pgcb_f.cpp
+
+# To create the object file tsp.o, we need the source
+# files lcs.cpp, lcs.h and utils.h:
+#
+tsp.o:  tsp.cpp $(INCLUDES)utils.h $(INCLUDES)tsp.h $(INCLUDES)matrix.h
+	$(CC) $(CFLAGS) -c tsp.cpp
+
+# To create the object file tsp_f.o, we need the source files
+# tsp_f_f.cpp, lcs.h and utils.h:
+#
+tsp_f.o:  $(FUNCTIONS)tsp_f.cpp $(INCLUDES)utils.h $(INCLUDES)tsp.h $(INCLUDES)matrix.h
+	$(CC) $(CFLAGS) -c $(FUNCTIONS)tsp_f.cpp
 
 # To create the object file utils_f.o, we need the source files
 # utils_f.cpp and utils.h:
