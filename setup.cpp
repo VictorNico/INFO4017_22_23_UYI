@@ -7,8 +7,8 @@
 #include "./includes/pgcb.h"
 #include "./includes/lcs.h"
 #include "./includes/tsp.h"
+#include "./includes/cctp1.h"
 #include "./includes/setup.h"
-
 
 int main()
 {
@@ -33,7 +33,7 @@ bool MainTryParse(string &input, int &output)
     {
         return false;
     }
-    return (output >= 0 && output < 6);
+    return (output >= 0 && output < 7);
 }
 
 void MainActionMenu()
@@ -44,6 +44,7 @@ void MainActionMenu()
     cout << "  3) SEQUENCE GLOBAL ALIGNMENT " << endl;
     cout << "  4) PGCB " << endl;
     cout << "  5) TSP USING SA " << endl;
+    cout << "  6) CC|TP " << endl;
     cout << "  0) EXIT " << endl;
 }
 
@@ -92,6 +93,10 @@ void MainActionOption()
         case 5:
             // code load pgcb
             TSPLauncher(); 
+            break;
+        case 6:
+            // code load pgcb
+            CCTPLauncher();
             break;
         default:
             // code default

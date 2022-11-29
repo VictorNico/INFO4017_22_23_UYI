@@ -26,8 +26,15 @@ default: setup clean_bin
 # To create the executable file count we need the object files
 # strassen.o, setup.o, and all .o file peer to the project:
 #
-setup:  setup.o strassen.o matrix_f.o utils_f.o lcs.o lcs_f.o globalSequenceAlignment.o globalSequenceAlignment_f.o pgcb_f.o pgcb.o tsp_f.o tsp.o
+setup:  setup.o cctp1.o strassen.o matrix_f.o utils_f.o lcs.o lcs_f.o globalSequenceAlignment.o globalSequenceAlignment_f.o pgcb_f.o pgcb.o tsp_f.o tsp.o
 	$(CC) $(CFLAGS) -o setup *.o
+
+#setup:  cctp1.o
+#	$(CC) $(CFLAGS) -o cctp1 *.o
+
+cctp1.o:  cctp1.cpp $(INCLUDES)*cctp1.h
+	$(CC) $(CFLAGS) -c cctp1.cpp
+
 
 # To create the object file setup.o, we need the source
 # files setup.cpp and all headers files:
